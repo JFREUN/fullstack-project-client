@@ -1,6 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
+import service from "../api/service";
+import { useNavigate } from "react-router-dom";
+
 const API_URL = "http://localhost:5005";
 
 export default function AddRecipe() {
@@ -10,24 +13,49 @@ export default function AddRecipe() {
   const [ingredients, setIngredients] = useState("");
   const [cookingTime, setCookingTime] = useState(0);
 
-  const handleSubmit = (e) => {
-    // <== ADD
-    e.preventDefault();
+  const navigate = useNavigate();
 
-    const requestBody = { name, imageUrl, instruction, ingredients, cookingTime };
-
-    axios
-      .post(`${API_URL}/api/recipes`, requestBody)
-      .then((response) => {
-        setName("");
-        setImageUrl("");
-        setInstruction("");
-        setIngredients("");
-        setCookingTime("");
-        console.log(imageUrl)
+  const handleFileUpload = (e) => {
+    // console.log("The file to be uploaded is: ", e.target.files[0]);
+ 
+    const uploadData = new FormData();
+ 
+    // imageUrl => this name has to be the same as in the model since we pass
+    // req.body to .create() method when creating a new movie in '/api/movies' POST route
+    uploadData.append("imageUrl", e.target.files[0]);
+ 
+    service
+      .uploadImage(uploadData)
+      .then(response => {
+        // console.log("response is: ", response);
+        // response carries "fileUrl" which we can use to update the state
+        setImageUrl(response.fileUrl);
       })
-      .catch((error) => console.log(error));
+      .catch(err => console.log("Error while uploading the file: ", err));
   };
+ 
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+ 
+    service
+      .createRecipe({ name, ingredients, imageUrl, instruction, cookingTime })
+      .then(res => {
+        // console.log("added new movie: ", res);
+ 
+        // Reset the form
+        setCookingTime("");
+        setImageUrl("");
+        setIngredients("");
+        setInstruction("");
+        setName("");
+      
+        // navigate to another page
+        navigate("/");
+      })
+      .catch(err => console.log("Error while adding the new movie: ", err));
+  };
+ 
 
 
 
@@ -37,7 +65,7 @@ export default function AddRecipe() {
         <label>Name:</label>
         <input type="text" name="name" value={name} onChange={e => setName(e.target.value)} />
         <label>Image:</label>
-        <input type="file" name="imageUrl" value={imageUrl} onChange={e => setImageUrl(e.target.value)} />
+        <input type="file" onChange={(e) => handleFileUpload(e)} />
         <label>Instruction:</label>
         <input type="text" name="instruction" value={instruction} onChange={e => setInstruction(e.target.value)} />
         <label>Ingredients:</label>
