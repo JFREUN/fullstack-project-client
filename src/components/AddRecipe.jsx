@@ -1,10 +1,9 @@
 import React from "react";
 import { useState } from "react";
-import axios from "axios";
 import service from "../api/service";
-import { useNavigate } from "react-router-dom";
 
-const API_URL = "http://localhost:5005";
+
+
 
 export default function AddRecipe() {
   const [name, setName] = useState("");
@@ -13,7 +12,7 @@ export default function AddRecipe() {
   const [ingredients, setIngredients] = useState("");
   const [cookingTime, setCookingTime] = useState(0);
 
-  const navigate = useNavigate();
+ 
 
   const handleFileUpload = (e) => {
     // console.log("The file to be uploaded is: ", e.target.files[0]);
@@ -51,7 +50,7 @@ export default function AddRecipe() {
         setName("");
       
         // navigate to another page
-        navigate("/");
+       
       })
       .catch(err => console.log("Error while adding the new movie: ", err));
   };
