@@ -1,18 +1,21 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import service from "../api/service";
+import { AuthContext } from "./../context/auth.context";
 
 
 
-
-export default function AddRecipe() {
+export default function AddRecipe(props) {
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [instruction, setInstruction] = useState("");
   const [ingredients, setIngredients] = useState("");
   const [cookingTime, setCookingTime] = useState(0);
 
- 
+  const {user} = useContext(AuthContext);
+  console.log(user)
+  
+  
 
   const handleFileUpload = (e) => {
     // console.log("The file to be uploaded is: ", e.target.files[0]);
@@ -38,9 +41,9 @@ export default function AddRecipe() {
     e.preventDefault();
  
     service
-      .createRecipe({ name, ingredients, imageUrl, instruction, cookingTime })
+      .createRecipe({ name, ingredients, imageUrl, instruction, cookingTime, userId: user._id })
       .then(res => {
-        // console.log("added new movie: ", res);
+        console.log("added new recipe: ", res);
  
         // Reset the form
         setCookingTime("");
@@ -49,7 +52,7 @@ export default function AddRecipe() {
         setInstruction("");
         setName("");
       
-        // navigate to another page
+        props.refreshRecipes()
        
       })
       .catch(err => console.log("Error while adding the new movie: ", err));

@@ -32,27 +32,18 @@ export default function AddMeal() {
       })
       .catch((error) => console.log(error));
   };
-useEffect(() => {
-  
-
-  
+useEffect(() => {  
   if (search){
-
     axios.get(`${API_URL}/api/search?name=${search}`)
   .then(response=>{
     setAllRecipes(response.data)
   })
-  }else{
-
-    
+  }else{  
       axios.get(`${API_URL}/api/recipes`)
       .then((response) => {
         setAllRecipes(response.data)
       })
-    
-  
   }
-
 }, [search])
 
 
@@ -106,14 +97,6 @@ useEffect(() => {
           </div>
         </fieldset>
         <input type="text" placeholder="Search recipe name" value={search} onChange = {(e) => setSearch (e.target.value)} />
-        {allRecipes.map(
-          (oneRecipe) => (
-          <div key={oneRecipe._id}>
-            <p>{oneRecipe.name}</p>
-            <button onClick={() => setRecipeId(oneRecipe._id)}>Select</button>
-          </div>
-        ))}
-
         {allRecipes.map(
           (oneRecipe) => (
           <div key={oneRecipe._id}>

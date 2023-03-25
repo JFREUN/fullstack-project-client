@@ -9,6 +9,11 @@ export default function EditMeal() {
   const navigate = useNavigate();
   const [day, setDay] = useState("");
   const [mealType, setMealType] = useState("");
+  const[search , setSearch] = useState("");
+  const[recipeId, setRecipeId] = useState("");
+  const[allRecipes, setAllRecipes] = useState([]);
+
+
 
   const { mealId } = useParams();
 
@@ -24,20 +29,36 @@ export default function EditMeal() {
       .catch((error) => console.log(error));
   }, [mealId]);
 
+  useEffect(() => {  
+    if (search){
+      axios.get(`${API_URL}/api/search?name=${search}`)
+    .then(response=>{
+      setAllRecipes(response.data)
+    })
+    }else{  
+        axios.get(`${API_URL}/api/meals/${mealId}`)
+        .then((response) => {
+          const oneMeal = response.data
+          setAllRecipes([oneMeal.recipe])
+        })
+    }
+  }, [search])
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("In handleSubmit")
 
-    const requestBody = { day, mealType };
+    const requestBody = { day, mealType, recipe: recipeId };
 
     axios
       .put(`${API_URL}/api/meals/${mealId}`, requestBody)
       .then((response) => {
-        setDay("");
-        setMealType("");
         navigate(`/meals`);
       })
       .catch((error) => console.log(error));
   };
+
+
 
   const deleteMeal = () => {
     //  <== ADD
@@ -124,6 +145,15 @@ export default function EditMeal() {
             </div>
           </div>
         </fieldset>
+        <input type="text" placeholder="Search recipe name" value={search} onChange = {(e) => setSearch (e.target.value)} />
+        
+        { allRecipes.map(
+          (oneRecipe) => {
+          return(<div key={oneRecipe._id}>
+            <p>{oneRecipe.name}</p>
+            <button type="button" onClick={() => setRecipeId(oneRecipe._id)}>Select</button>
+          </div>)
+        })}
 
         <button type="submit">Update Meal</button>
       </form>

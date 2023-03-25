@@ -8,7 +8,9 @@ import EditRecipe from './pages/EditRecipe';
 import MealPlan from './pages/MealPlan';
 import EditMeal from './pages/EditMealDay';
 import Login from './pages/Login';
-import Navbar from './components/Navbar'
+import Navbar from './components/Navbar'; 
+import IsPrivate from "./components/IsPrivate";  
+import IsAnon from "./components/IsAnon"; 
 
 function App() {
   return (
@@ -17,13 +19,15 @@ function App() {
       <Routes>
       
       <Route path="/" element={<HomePage/>}/>
-      <Route path="/signup" element={<SignUp/>}/>
-      <Route path="/login" element={<Login/>}/>
-      <Route path="/recipes" element={<Recipes/>}/>
-      <Route path="/recipes/:recipeId" element={<RecipeDetail/>}/>
-      <Route path="/recipes/edit/:recipeId" element={<EditRecipe/>}/>
-      <Route path='/meals' element ={<MealPlan/>}/>
-      <Route path='meals/edit/:mealId' element={<EditMeal/>}/>
+
+      <Route path="/signup" element={ <IsAnon> <SignUp/> </IsAnon>}/>  
+      <Route path="/login" element={<IsAnon> <Login/> </IsAnon>}/>
+
+      <Route path="/recipes" element={<IsPrivate><Recipes/></IsPrivate>}/>
+      <Route path="/recipes/:recipeId" element={<IsPrivate><RecipeDetail/></IsPrivate>}/>
+      <Route path="/recipes/edit/:recipeId" element={<IsPrivate><EditRecipe/></IsPrivate>}/>
+      <Route path='/meals' element ={<IsPrivate><MealPlan/></IsPrivate>}/>
+      <Route path='meals/edit/:mealId' element={<IsPrivate><EditMeal/></IsPrivate>}/>
       </Routes>
     </div>
   );
