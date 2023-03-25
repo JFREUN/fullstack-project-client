@@ -14,6 +14,9 @@ export default function AddMeal() {
   
  
 
+
+
+
   
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -103,6 +106,14 @@ useEffect(() => {
           </div>
         </fieldset>
         <input type="text" placeholder="Search recipe name" value={search} onChange = {(e) => setSearch (e.target.value)} />
+        {allRecipes.map(
+          (oneRecipe) => (
+          <div key={oneRecipe._id}>
+            <p>{oneRecipe.name}</p>
+            <button onClick={() => setRecipeId(oneRecipe._id)}>Select</button>
+          </div>
+        ))}
+
         {allRecipes.map(
           (oneRecipe) => (
           <div key={oneRecipe._id}>

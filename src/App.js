@@ -24,7 +24,6 @@ function App() {
       <Route path="/recipes/edit/:recipeId" element={<EditRecipe/>}/>
       <Route path='/meals' element ={<MealPlan/>}/>
       <Route path='meals/edit/:mealId' element={<EditMeal/>}/>
-
       </Routes>
     </div>
   );

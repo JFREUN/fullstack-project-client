@@ -23,7 +23,6 @@ export default function Recipes() {
           <div key={recipe._id}>
             <p>{recipe.name}</p>
             <img src={recipe.imageUrl} alt="recipe" width="200" />
-           
           </div>
         ))}
     </div>
