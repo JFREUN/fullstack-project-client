@@ -19,16 +19,27 @@ export default function MealPlan() {
   }, []); 
 
   return (
-    <div>
-    <AddMeal/>
-    {meals.length > 0 &&
-        meals.map((meal) => (
-          <div key={meal._id}>
-            <p>{meal.day}</p>
-            <p>{meal.mealType}</p>
-            <p>{meal.recipe.name}</p>
-          </div>
+<div>
+  <AddMeal/>
+  <table className="meal-table">
+      <thead>
+      <th>Day</th>
+      <th>Recipe</th>
+      <th>Meal Type</th>
+      </thead>
+      <tbody>
+        {meals.map((meal) => (
+          <tr key={meal._id}>
+            <td>
+            <td>{meal.day}</td>
+            <td>{meal.recipe.name}</td>
+            <td>{meal.mealType}</td>
+            </td>
+          </tr>
         ))}
-    </div>
-  )
+      </tbody>
+    </table>
+  
+  </div>
+);
 }

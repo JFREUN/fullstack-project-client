@@ -5,7 +5,7 @@ body {
     color: #333;
   }
   
-  textarea {
+  /* textarea {
     width: 100%;
     height: 100px;
     padding: 10px;
@@ -17,12 +17,25 @@ body {
     line-height: 1.5;
     color: #333;
     background-color: #64be953e;
+  } */
+  .form-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    margin-top: 50px;
   }
   
   
-  
   .form-group {
-    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 20px;
+    justify-content: center;
+
   }
   
 
@@ -30,35 +43,38 @@ body {
 .recipe-form {
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     align-items: center;
-    margin: 20px;
-    padding: 20px;
-    border: 1px solid #64be95;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+    gap: 20px;
+    width: 100%;
+   
   }
-  
+
   label {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
-    color: #1f6b49;
-  }
+   margin-right: 10px;
+  width: 100px;
+  margin-top: 20px;
+}
   
   label > span {
     margin-bottom: 5px;
   }
   
-  input,
-  textarea {
-    padding: 10px;
-    border: 1px solid #65e0a8;
-    border-radius: 5px;
-    font-size: 1rem;
-    margin-top: 5px;
-    text-align: center;
-  }
+  
+input,
+textarea {
+  flex-basis: calc(50% - 10px);
+  padding: 10px;
+  border: 1px solid #65e0a8;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin-top: 5px;
+  text-align: center;
+}
+
+textarea {
+  flex-basis: 50%;
+}
   
   button[type='submit'] {
     background-color: #65e0a8;
@@ -67,12 +83,28 @@ body {
     border: none;
     border-radius: 5px;
     font-size: 1.2rem;
-    margin-top: 10px;
+    margin-top: 40px;
+    margin-bottom: 30px;
     cursor: pointer;
   }
   
   button[type='submit']:hover {
     background-color: #207d6e;
+  }
+
+  .recipeHideBtn {
+    background-color: #65e0a8;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    margin: auto;
+    /* margin-top: 10px; */
+    margin-left: 40px;
+    /* margin-right: 120px;  */
+    cursor: pointer;
+
   }
   
   .recipe-list {
@@ -89,6 +121,7 @@ body {
     padding: 20px;
     text-align: center;
     color: #1f6b49;
+    margin: 15px;
   }
 /*   
   .navbar {
@@ -141,3 +174,32 @@ body {
     margin-right: 20px;
   }
   
+  .meal-table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .meal-table th,
+  .meal-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .meal-table th {
+    background-color: #f2f2f2;
+  }
+  
+
+  input {
+    margin-top: 1rem;
+}
+
+input::file-selector-button {
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    padding: 0.5em;
+    border: thin solid rgb(72, 189, 125);
+    border-radius: 3px;
+    background-color: #65e0a8;
+}
