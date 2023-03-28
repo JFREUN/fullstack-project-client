@@ -122,40 +122,7 @@ useEffect(() => {
 
         <button className="submitButton" type="submit">Submit</button>
       </form>
-      {/* <fieldset>
-          <legend>Meal Type:</legend>
-          <div onChange={(e) => setMealType(e.target.value)}>
-          <div>
-            <input
-              type="radio"
-              id="breakfast"
-              name="mealType"
-              value="Breakfast"
-              // onChange={(e) => console.log(e.target.value)}
-            />
-            <label htmlFor="breakfast">Breakfast</label>
-          </div>
-          <div>
-            <input
-              type="radio"
-              id="lunch"
-              name="mealType"
-              value="Lunch"
-              // onChange={(e) => console.log(e.target)}
-            />
-            <label htmlFor="lunch">Lunch</label>
-          </div>
-          <div>
-            <input
-              type="radio"
-              id="dinner"
-              name="mealType"
-              value="Dinner"
-              // onChange={(e) => console.log(e.target)}
-            />
-            <label htmlFor="dinner">Dinner</label>
-          </div>
-          </div>
+     
     </div>
   );
 }
