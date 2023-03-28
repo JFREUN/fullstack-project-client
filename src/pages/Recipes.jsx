@@ -2,6 +2,7 @@ import React from 'react'
 import AddRecipe from '../components/AddRecipe'
 import { useState, useEffect } from "react";
 import service from "../api/service";
+import '../css/styles.css'
  
 
 export default function Recipes() {
@@ -22,14 +23,20 @@ export default function Recipes() {
 
   return (
     <div>
-    <AddRecipe refreshRecipes={refreshRecipes}/>
-    {recipes &&
-        recipes.map((recipe) => (
-          <div key={recipe._id}>
-            <p>{recipe.name}</p>
-            <img src={recipe.imageUrl} alt="recipe" width="200" />
-          </div>
-        ))}
+      <AddRecipe refreshRecipes={refreshRecipes}/>
+      <div className="recipe-list">
+        {recipes &&
+          recipes.map((recipe) => (
+            <div key={recipe._id} className="recipe-container">
+              <h3>{recipe.name}</h3>
+              <img src={recipe.imageUrl} alt="recipe" />
+              {/* <p>Ingredients:</p>
+              <textarea>{recipe.ingredients}</textarea>
+              <p>Instruction:</p>
+              <textarea>{recipe.instruction}</textarea>
+              <p>{recipe.cookingTime}</p> */}
+            </div>
+          ))}
+      </div>
     </div>
-  )
-}
+  )}
