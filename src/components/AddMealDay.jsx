@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "./../context/auth.context";
 const API_URL = "http://localhost:5005";
 
-export default function AddMeal() {
+export default function AddMeal(props) {
   const navigate = useNavigate();
   const [day, setDay] = useState("");
 
@@ -33,11 +33,11 @@ export default function AddMeal() {
       .post(`${API_URL}/api/meals`, requestBody)
       .then((response) => {
         console.log(day)
-        console.log(response)
+        console.log(response.data)
         setBreakfast("");
         setLunch("");
         setDinner("");
-        navigate("/meals");
+       props.getMeals()
       })
       .catch((error) => console.log(error));
   };
