@@ -101,7 +101,7 @@ useEffect(() => {
           (oneRecipe) => (
           <div key={oneRecipe._id}>
             <p>{oneRecipe.name}</p>
-            <button onClick={() => setRecipeId(oneRecipe._id)}>Select</button>
+            <button type = 'button' onClick={() => setRecipeId(oneRecipe._id)}>Select</button>
           </div>
         ))}
 
