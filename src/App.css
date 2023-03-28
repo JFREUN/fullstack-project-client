@@ -1,3 +1,11 @@
+
+/* Colours: 
+white: #F4F9F4; 
+light-green: #A7D7C5;
+green: #74B49B;
+dark-green: #5C8D89;
+*/
+
 .App {
   text-align: center;
 }
@@ -35,4 +43,119 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Add Meal Component */
+.addMealDay{
+  margin: 20px auto;
+  background-color: #A7D7C5;
+  width: 30%;
+  padding: 20px;
+  border-radius: 20px;
+  text-align: left;
+}
+#selectDay{
+  width: 100%;
+  padding: 8px;
+  margin: 10px 0;
+  background-color: #F4F9F4;
+  border-style: none;
+  border-radius: 5px;
+}
+.mealSearch{
+  padding-right: 20px;
+}
+
+.addMealLabels{
+  display: block;
+}
+.addMealInputs{
+  width: 100%;
+  padding: 8px;
+  margin: 10px 0;
+  background-color: #F4F9F4;
+  border-style: none;
+  border-radius: 5px;
+}
+.searchDiv{
+background-color: rgba(244, 249, 244, 0.5);
+border-radius: 10px;
+padding: 10px 20px;
+margin-bottom: 10px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.searchP{
+  margin: 0;
+}
+
+.searchButton{
+  border-style: none;
+  background-color: #F4F9F4;
+  padding: 7px 10px; 
+  width: 100px;
+  border-radius: 5px;
+}
+
+.searchButton:focus{
+  background-color: #74B49B;
+  color: #F4F9F4;
+}
+
+.submitButton{
+  border-style: none;
+  background-color: #5C8D89;
+  padding: 12px 20px; 
+  width: 125px;
+  border-radius: 5px;
+  color: #F4F9F4;
+  margin-top: 20px;
+}
+
+/* Mealplan site */
+
+.mealplan{
+  display: flex;
+  width: 80%; 
+  margin: 20px auto;
+  justify-content: stretch;
+  border-radius: 10px;
+  background-color: #F4F9F4;
+
+}
+
+.dayColumn{
+  height: 500px;
+  width: 20%;
+  border-radius: 10px;
+}
+
+.dayColumn > p{
+  border-bottom: solid lightgray 1px;
+  padding-bottom: 20px;
+  font-weight: 600;
+}
+
+.mealDiv{
+  padding: 10px; 
+  background-color: rgba(167, 215, 197, 0.5);
+  text-align: center;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+.mealsContainer{
+  width: 100%;
+}
+
+.mealButton{
+  border-style: none;
+  background-color: #5C8D89;
+  padding: 12px 20px; 
+  min-width: 125px;
+  border-radius: 5px;
+  color: #F4F9F4;
+  margin-top: 20px;
 }
