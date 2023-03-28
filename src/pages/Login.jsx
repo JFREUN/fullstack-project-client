@@ -29,7 +29,7 @@ function Login(props) {
         // console.log("JWT token", response.data.authToken);
         
         storeToken(response.data.authToken);
-         authenticateUser();
+        authenticateUser();
         navigate("/");
       })
       .catch((error) => {

@@ -1,13 +1,12 @@
 import axios from "axios";
 import React from "react";
 import { useEffect,useState, useContext} from "react";
-import { useNavigate } from "react-router-dom";
 import { AuthContext } from "./../context/auth.context";
 const API_URL = "http://localhost:5005";
 
 export default function AddMeal(props) {
-  const navigate = useNavigate();
   const [day, setDay] = useState("");
+  const[error, setError] = useState('');
 
   const [breakfast, setBreakfast] = useState('')
   const [lunch, setLunch] = useState('')
@@ -17,9 +16,9 @@ export default function AddMeal(props) {
   const[allLunches, setAllLunches] = useState([]);
   const[allDinners, setAllDinners] = useState([]);
   
-  const[breakfastSearch , setBreakfastSearch] = useState("")
-  const[lunchSearch , setLunchSearch] = useState("")
-  const[dinnerSearch , setDinnerSearch] = useState("")
+  const[breakfastSearch , setBreakfastSearch] = useState("");
+  const[lunchSearch , setLunchSearch] = useState("");
+  const[dinnerSearch , setDinnerSearch] = useState("");
 
 
   const {user} = useContext(AuthContext);
@@ -28,18 +27,26 @@ export default function AddMeal(props) {
     e.preventDefault();
 
     const requestBody = { day, breakfast, lunch, dinner, userId: user};
-    
-    axios
-      .post(`${API_URL}/api/meals`, requestBody)
-      .then((response) => {
-        console.log(day)
-        console.log(response.data)
-        setBreakfast("");
-        setLunch("");
-        setDinner("");
-       props.getMeals()
-      })
-      .catch((error) => console.log(error));
+    const sameDay = props.meals.filter(meal => meal.day === day);
+    const storedToken = localStorage.getItem('authToken');
+
+      if(sameDay){
+        return setError('Please choose a different day or delete exisiting day.')
+      } else{
+        return(
+        axios
+        .post(`${API_URL}/api/meals`, requestBody, { headers: { Authorization: `Bearer ${storedToken}` } })
+        .then((response) => {
+          console.log(day)
+          console.log(response.data)
+          setBreakfast("");
+          setLunch("");
+          setDinner("");
+         props.getMeals()
+        })
+        .catch((error) => console.log(error))
+        )
+      }
   };
 
 useEffect(() => {  
@@ -74,6 +81,7 @@ useEffect(() => {
     <div>
     <h2>Add a meal:</h2>
       <form className ="addMealDay" onSubmit={handleSubmit}>
+      <p>{error}</p>
         <label className="addMealLabels" htmlFor="selectDay">Day:</label>
         <select id="selectDay" name="day" value={day} onChange={(e) => setDay(e.target.value)}>
           <option value="Monday">Monday</option>

@@ -1,0 +1,1 @@
+// const storedToken = localStorage.getItem("authToken"); add to axios call: { headers: { Authorization: `Bearer ${storedToken}` } }

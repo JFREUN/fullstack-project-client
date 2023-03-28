@@ -22,8 +22,10 @@ export default function MealPlan() {
   };
 
 const getMeals = () =>{
+  const storedToken = localStorage.getItem("authToken");
+
   axios
-  .get(`${API_URL}/api/meals`)
+  .get(`${API_URL}/api/meals`, { headers: { Authorization: `Bearer ${storedToken}` }})
   .then((response) => {
     console.log(response.data)
     setMeals(response.data);
@@ -32,8 +34,6 @@ const getMeals = () =>{
 }
   useEffect(() => {
    getMeals()
-  
-  
   }, []);
 
   useEffect(() => {
@@ -51,7 +51,7 @@ const getMeals = () =>{
   return (
     <div>
 
-      {show && <AddMeal getMeals={getMeals}/>}
+      {show && <AddMeal getMeals={getMeals} meals={meals}/>}
       <button className="mealButton" onClick={toggleShow}>{show ? "Hide Form" : "Add Meals"}</button>
       <div className="mealplan">
         <div className="dayColumn">

@@ -13,19 +13,25 @@ const errorHandler = (err) => {
 };
  
 const getRecipes = () => {
-  return api.get("/recipes")
+  const storedToken = localStorage.getItem('authToken');
+
+  return api.get("/recipes", { headers: { Authorization: `Bearer ${storedToken}` } })
     .then((res) => res.data)
     .catch(errorHandler);
 };
  
 const uploadImage = (file) => {
-  return api.post("/upload", file)
+  const storedToken = localStorage.getItem('authToken');
+
+  return api.post("/upload", file, { headers: { Authorization: `Bearer ${storedToken}` } })
     .then(res => res.data)
     .catch(errorHandler);
 };
  
 const createRecipe = (newRecipe) => {
-  return api.post("/recipes", newRecipe)
+  const storedToken = localStorage.getItem('authToken');
+
+  return api.post("/recipes", newRecipe, { headers: { Authorization: `Bearer ${storedToken}` } })
     .then(res => res.data)
     .catch(errorHandler);
 };
