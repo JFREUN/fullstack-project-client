@@ -14,6 +14,9 @@ export default function AddMeal() {
   
  
 
+
+
+
   
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,27 +32,18 @@ export default function AddMeal() {
       })
       .catch((error) => console.log(error));
   };
-useEffect(() => {
-  
-
-  
+useEffect(() => {  
   if (search){
-
     axios.get(`${API_URL}/api/search?name=${search}`)
   .then(response=>{
     setAllRecipes(response.data)
   })
-  }else{
-
-    
+  }else{  
       axios.get(`${API_URL}/api/recipes`)
       .then((response) => {
         setAllRecipes(response.data)
       })
-    
-  
   }
-
 }, [search])
 
 

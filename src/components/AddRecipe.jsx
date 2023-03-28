@@ -1,18 +1,21 @@
 import React from "react";
-import { useState } from "react";
+import { useState,useContext } from "react";
 import service from "../api/service";
+import { AuthContext } from "./../context/auth.context";
 
 
 
-
-export default function AddRecipe() {
+export default function AddRecipe(props) {
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [instruction, setInstruction] = useState("");
   const [ingredients, setIngredients] = useState("");
   const [cookingTime, setCookingTime] = useState(0);
 
- 
+  const {user} = useContext(AuthContext);
+  console.log(user)
+  
+  
 
   const handleFileUpload = (e) => {
     // console.log("The file to be uploaded is: ", e.target.files[0]);
@@ -38,9 +41,9 @@ export default function AddRecipe() {
     e.preventDefault();
  
     service
-      .createRecipe({ name, ingredients, imageUrl, instruction, cookingTime })
+      .createRecipe({ name, ingredients, imageUrl, instruction, cookingTime, userId: user._id })
       .then(res => {
-        // console.log("added new movie: ", res);
+        console.log("added new recipe: ", res);
  
         // Reset the form
         setCookingTime("");
@@ -49,7 +52,7 @@ export default function AddRecipe() {
         setInstruction("");
         setName("");
       
-        // navigate to another page
+        props.refreshRecipes()
        
       })
       .catch(err => console.log("Error while adding the new movie: ", err));
@@ -60,15 +63,20 @@ export default function AddRecipe() {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="recipe-form">
         <label>Name:</label>
         <input type="text" name="name" value={name} onChange={e => setName(e.target.value)} />
         <label>Image:</label>
         <input type="file" onChange={(e) => handleFileUpload(e)} />
-        <label>Instruction:</label>
-        <input type="text" name="instruction" value={instruction} onChange={e => setInstruction(e.target.value)} />
-        <label>Ingredients:</label>
-        <input type="text" name="ingredients" value={ingredients} onChange={e => setIngredients(e.target.value)} />
+        <div className="form-group">
+  <label htmlFor="ingredients">Ingredients:</label>
+  <textarea id="ingredients" name="ingredients" className="form-input" value={ingredients} onChange={e => setIngredients(e.target.value)} />
+</div>
+
+<div className="form-group">
+  <label htmlFor="instruction">Instruction:</label>
+  <textarea id="instruction" name="instruction" className="form-input" value={instruction} onChange={e => setInstruction(e.target.value)} />
+</div>
         <label>Cooking Time:</label>
         <input type="text" name="cookingTime" value={cookingTime} onChange={e => setCookingTime(e.target.value)} />
         <button type="submit">Submit</button>
