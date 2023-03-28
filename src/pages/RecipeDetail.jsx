@@ -36,6 +36,7 @@ function RecipeDetail (props) {
   
   return (
     <div className="RecipeDetails">
+
       {recipe && (
         <>
           <h1>{recipe.name}</h1>
