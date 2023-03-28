@@ -156,7 +156,6 @@ useEffect(() => {
             <label htmlFor="dinner">Dinner</label>
           </div>
           </div>
-        </fieldset> */}
     </div>
   );
 }

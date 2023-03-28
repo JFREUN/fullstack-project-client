@@ -1,35 +1,62 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "./../context/auth.context";
+import "../css/styles.css";
+import logo from "../images/dyner-low-resolution-logo-color-on-transparent-background.png"
 
 function Navbar() {
-  // Subscribe to the AuthContext to gain access to
-  // the values from AuthContext.Provider `value` prop
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
 
   return (
-    <nav>
-      <Link to="/">
-        <button>Home</button>
-      </Link>
-
-      {isLoggedIn && (
-        <>
-          <Link to="/meals">
-            <button>Meal Plan</button>
+    <nav className="navbar">
+      <ul className="navbar-nav">
+      <img src={logo} alt="logo" className="navbar-logo" />
+        <li className="nav-item">
+       
+          <Link to="/" className="nav-link">
+            Home
           </Link>
-        
-          <button onClick={logOutUser}>Logout</button>
-          <span>Welcome {user && user.name}</span>
-        </>
-      )}
+        </li>
+        {isLoggedIn && (
+          <>
+            <li className="nav-item">
+              <Link to="/meals" className="nav-link">
+                Meal Plan
+              </Link>
+            </li>
 
-      {!isLoggedIn && (
-        <>
-          <Link to="/signup"> <button>Sign Up</button> </Link>
-          <Link to="/login"> <button>Login</button> </Link>
-        </>
-      )}      
+            <li className="nav-item">
+              <Link to="/recipes" className="nav-link">
+                Recipes
+              </Link>
+            </li>
+            
+            <li className="nav-item">
+              <Link onClick={logOutUser} className="nav-link logout-link">
+                Logout
+              </Link>
+            </li>
+            <li className="nav-item">
+              <span className="nav-link">Welcome {user && user.name}!</span>
+            </li>
+          </>
+        )}
+        {!isLoggedIn && (
+          <>
+            <li className="nav-item">
+              <Link to="/signup" className="nav-link">
+                Sign Up
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/login" className="nav-link">
+                Login
+              </Link>
+            </li>
+            
+          </>
+        )}
+      </ul>
     </nav>
   );
 }

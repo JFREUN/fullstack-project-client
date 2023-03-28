@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect, useContext } from "react";
+import { useState,useContext } from "react";
 import service from "../api/service";
 import { AuthContext } from "./../context/auth.context";
 
@@ -63,15 +63,20 @@ export default function AddRecipe(props) {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="recipe-form">
         <label>Name:</label>
         <input type="text" name="name" value={name} onChange={e => setName(e.target.value)} />
         <label>Image:</label>
         <input type="file" onChange={(e) => handleFileUpload(e)} />
-        <label>Instruction:</label>
-        <input type="text" name="instruction" value={instruction} onChange={e => setInstruction(e.target.value)} />
-        <label>Ingredients:</label>
-        <input type="text" name="ingredients" value={ingredients} onChange={e => setIngredients(e.target.value)} />
+        <div className="form-group">
+  <label htmlFor="ingredients">Ingredients:</label>
+  <textarea id="ingredients" name="ingredients" className="form-input" value={ingredients} onChange={e => setIngredients(e.target.value)} />
+</div>
+
+<div className="form-group">
+  <label htmlFor="instruction">Instruction:</label>
+  <textarea id="instruction" name="instruction" className="form-input" value={instruction} onChange={e => setInstruction(e.target.value)} />
+</div>
         <label>Cooking Time:</label>
         <input type="text" name="cookingTime" value={cookingTime} onChange={e => setCookingTime(e.target.value)} />
         <button type="submit">Submit</button>
