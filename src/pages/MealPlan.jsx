@@ -21,14 +21,17 @@ export default function MealPlan() {
     setShow(!show);
   };
 
-
+const getMeals = () =>{
+  axios
+  .get(`${API_URL}/api/meals`)
+  .then((response) => {
+    console.log(response.data)
+    setMeals(response.data);
+  })
+  .catch((err) => console.log(err));
+}
   useEffect(() => {
-    axios
-      .get(`${API_URL}/api/meals`)
-      .then((response) => {
-        setMeals(response.data);
-      })
-      .catch((err) => console.log(err));
+   getMeals()
   
   
   }, []);
@@ -48,7 +51,7 @@ export default function MealPlan() {
   return (
     <div>
 
-      {show && <AddMeal />}
+      {show && <AddMeal getMeals={getMeals}/>}
       <button className="mealButton" onClick={toggleShow}>{show ? "Hide Form" : "Add Meals"}</button>
       <div className="mealplan">
         <div className="dayColumn">

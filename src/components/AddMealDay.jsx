@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "./../context/auth.context";
 const API_URL = "http://localhost:5005";
 
-export default function AddMeal() {
+export default function AddMeal(props) {
   const navigate = useNavigate();
   const [day, setDay] = useState("");
 
@@ -33,11 +33,11 @@ export default function AddMeal() {
       .post(`${API_URL}/api/meals`, requestBody)
       .then((response) => {
         console.log(day)
-        console.log(response)
+        console.log(response.data)
         setBreakfast("");
         setLunch("");
         setDinner("");
-        navigate("/meals");
+       props.getMeals()
       })
       .catch((error) => console.log(error));
   };
@@ -122,40 +122,7 @@ useEffect(() => {
 
         <button className="submitButton" type="submit">Submit</button>
       </form>
-      {/* <fieldset>
-          <legend>Meal Type:</legend>
-          <div onChange={(e) => setMealType(e.target.value)}>
-          <div>
-            <input
-              type="radio"
-              id="breakfast"
-              name="mealType"
-              value="Breakfast"
-              // onChange={(e) => console.log(e.target.value)}
-            />
-            <label htmlFor="breakfast">Breakfast</label>
-          </div>
-          <div>
-            <input
-              type="radio"
-              id="lunch"
-              name="mealType"
-              value="Lunch"
-              // onChange={(e) => console.log(e.target)}
-            />
-            <label htmlFor="lunch">Lunch</label>
-          </div>
-          <div>
-            <input
-              type="radio"
-              id="dinner"
-              name="mealType"
-              value="Dinner"
-              // onChange={(e) => console.log(e.target)}
-            />
-            <label htmlFor="dinner">Dinner</label>
-          </div>
-          </div>
+     
     </div>
   );
 }
