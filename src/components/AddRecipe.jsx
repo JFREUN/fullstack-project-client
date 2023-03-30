@@ -11,7 +11,7 @@ export default function AddRecipe(props) {
   const [instruction, setInstruction] = useState("");
   const [ingredients, setIngredients] = useState("");
   const [cookingTime, setCookingTime] = useState(0);
-  const [showForm, setShowForm] = useState(true);
+  const [showForm, setShowForm] = useState(false);
 
   const {user} = useContext(AuthContext);
   console.log(user)
@@ -41,6 +41,8 @@ export default function AddRecipe(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
  
+   
+    
     service
       .createRecipe({ name, ingredients, imageUrl, instruction, cookingTime, userId: user._id })
       .then(res => {
@@ -68,6 +70,7 @@ export default function AddRecipe(props) {
   return (
     <div className="form-container">
     <button className="recipeHideBtn" onClick={toggleShowForm}>{showForm ? 'Hide Form' : 'Add Recipe'}</button>
+    <div className="form-group">
     {showForm && (
       <form onSubmit={handleSubmit} className="recipe-form">
         <div className="form-group">
@@ -92,7 +95,9 @@ export default function AddRecipe(props) {
         </div>
         <button type="submit">Submit</button>
       </form>
+      
     )}
+    </div>
   </div>
   
   );

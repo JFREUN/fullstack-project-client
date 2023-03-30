@@ -13,13 +13,13 @@ function RecipeDetail (props) {
   
   const getRecipe = () => {
     // Get the token from the localStorage
-    // const storedToken = localStorage.getItem('authToken');
+     const storedToken = localStorage.getItem('authToken');
 
     // Send the token through the request "Authorization" Headers
     axios
       .get(
         `${API_URL}/api/recipes/${recipeId}`,
-        // { headers: { Authorization: `Bearer ${storedToken}` } }
+        { headers: { Authorization: `Bearer ${storedToken}` } }
       )
       .then((response) => {
         const oneRecipe = response.data;
@@ -35,15 +35,20 @@ function RecipeDetail (props) {
 
   
   return (
-    <div className="RecipeDetails">
+    <div className="recipeDetails">
 
       {recipe && (
         <>
           <h1>{recipe.name}</h1>
-          <img src={recipe.imageUrl} alt="" />
-          <p>{recipe.instruction}</p>
-          <p>{recipe.ingredients}</p>
-          <p>{recipe.cookingTime}</p>
+          
+          <div className='recipeDiv'>
+          <img className='imageDetail' src={recipe.imageUrl} alt="" />
+            <div className='recipeContent'>
+          <p> Instructions: {recipe.instruction}</p>
+          <p>Ingredients: {recipe.ingredients}</p>
+          <p>Cooking Time: {recipe.cookingTime}</p>
+          </div>
+          </div>
         </>
       )}
 
@@ -51,11 +56,11 @@ function RecipeDetail (props) {
       
 
       <Link to="/recipes">
-        <button>Back to recipes</button>
+        <button className='recipebtn'>Back to recipes</button>
       </Link>
           
       <Link to={`/recipes/edit/${recipeId}`}>
-        <button>Edit Recipe</button>
+        <button className='recipebtn'>Edit Recipe</button>
       </Link>
       
     </div>

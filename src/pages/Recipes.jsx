@@ -3,6 +3,7 @@ import AddRecipe from '../components/AddRecipe'
 import { useState, useEffect } from "react";
 import service from "../api/service";
 import '../css/styles.css'
+import { Link } from 'react-router-dom';
  
 
 export default function Recipes() {
@@ -30,12 +31,9 @@ export default function Recipes() {
             <div key={recipe._id} className="recipe-container">
               <h3>{recipe.name}</h3>
               <img src={recipe.imageUrl} alt="recipe" />
-              {/* <p>Ingredients:</p>
-              <textarea>{recipe.ingredients}</textarea>
-              <p>Instruction:</p>
-              <textarea>{recipe.instruction}</textarea>
-              <p>{recipe.cookingTime}</p> */}
+             <div className='detail-link'><Link className='linkDetail' to={`/recipes/${recipe._id}`}> Detail</Link></div>
             </div>
+            
           ))}
       </div>
     </div>
