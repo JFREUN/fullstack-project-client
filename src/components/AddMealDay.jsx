@@ -20,15 +20,18 @@ export default function AddMeal(props) {
   const[lunchSearch , setLunchSearch] = useState("");
   const[dinnerSearch , setDinnerSearch] = useState("");
 
+  const [isLoading, setIsLoading] = useState(true);
+  const storedToken = localStorage.getItem('authToken');
+
+//add isLoading, set a new state to loading, when data is fetched set state to false, initial value true 
 
   const {user} = useContext(AuthContext);
   
   const handleSubmit = (e) => {
     e.preventDefault();
-
+   
     const requestBody = { day, breakfast, lunch, dinner, userId: user};
-    const sameDay = props.meals.filter(meal => meal.day === day);
-    const storedToken = localStorage.getItem('authToken');
+    const sameDay = props.meals.find(meal => meal.day === day);
 
       if(sameDay){
         return setError('Please choose a different day or delete exisiting day.')
@@ -37,8 +40,7 @@ export default function AddMeal(props) {
         axios
         .post(`${API_URL}/api/meals`, requestBody, { headers: { Authorization: `Bearer ${storedToken}` } })
         .then((response) => {
-          console.log(day)
-          console.log(response.data)
+          console.log("posted meal, breakfast, lunch, dinner:",response.data, breakfast, lunch, dinner)
           setBreakfast("");
           setLunch("");
           setDinner("");
@@ -49,18 +51,22 @@ export default function AddMeal(props) {
       }
   };
 
+
 useEffect(() => {  
+
   if (breakfastSearch){
-    axios.get(`${API_URL}/api/search?name=${breakfastSearch}`)
+    axios.get(`${API_URL}/api/search?name=${breakfastSearch}`, { headers: { Authorization: `Bearer ${storedToken}` } })
   .then(response=>{
     setAllBreakfasts(response.data)
+    setIsLoading(false)
   })
   }
 }, [breakfastSearch])
 
 useEffect(() => {  
+
   if (lunchSearch){
-    axios.get(`${API_URL}/api/search?name=${lunchSearch}`)
+    axios.get(`${API_URL}/api/search?name=${lunchSearch}`, { headers: { Authorization: `Bearer ${storedToken}` } })
   .then(response=>{
     setAllLunches(response.data)
   })
@@ -68,13 +74,15 @@ useEffect(() => {
 }, [lunchSearch])
 
 useEffect(() => {  
+
   if (dinnerSearch){
-    axios.get(`${API_URL}/api/search?name=${dinnerSearch}`)
+    axios.get(`${API_URL}/api/search?name=${dinnerSearch}`,{ headers: { Authorization: `Bearer ${storedToken}` } })
   .then(response=>{
     setAllDinners(response.data)
   })
   }
 }, [dinnerSearch])
+
 
 
   return (
@@ -96,7 +104,10 @@ useEffect(() => {
         <div className="mealSearch">
         <label className="addMealLabels" htmlFor="selectBreakfast"> Breakfast:</label>
         <input className="addMealInputs" id="selectBreakfast" type="text" placeholder="Search Breakfast" value={breakfastSearch} onChange = {(e) => setBreakfastSearch (e.target.value)} />
-        {allBreakfasts.map(
+        
+       { isLoading && <p>Page is loading</p>}
+        
+        { !isLoading && allBreakfasts.map(
           (oneRecipe) => {
             return(
           <div key={oneRecipe._id} className="searchDiv">

@@ -1,7 +1,9 @@
 import axios from "axios";
 import React from "react";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import AddMeal from "../components/AddMealDay";
+
 
 const API_URL = "http://localhost:5005";
 
@@ -61,7 +63,7 @@ const getMeals = () =>{
               <div className="mealDiv">{monday.breakfast.name}</div>
               <div className="mealDiv">{monday.lunch.name}</div>
               <div className="mealDiv">{monday.dinner.name}</div>
-              <button className="mealButton">Edit Monday</button>
+              <Link className="mealButton">Edit Monday</Link>
             </div>
           ) }
           {!monday && <span>Please add a new meal!</span>}

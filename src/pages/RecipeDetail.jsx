@@ -46,10 +46,7 @@ function RecipeDetail (props) {
           <p>{recipe.cookingTime}</p>
         </>
       )}
-
       
-      
-
       <Link to="/recipes">
         <button>Back to recipes</button>
       </Link>
