@@ -160,3 +160,9 @@ align-items: center;
   color: #F4F9F4;
   margin-top: 20px;
 }
+
+/* Edit Mealday */
+.editMealLabels{
+  display: block;
+  width: 100%
+}

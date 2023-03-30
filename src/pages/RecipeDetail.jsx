@@ -51,10 +51,7 @@ function RecipeDetail (props) {
           </div>
         </>
       )}
-
       
-      
-
       <Link to="/recipes">
         <button className='recipebtn'>Back to recipes</button>
       </Link>
