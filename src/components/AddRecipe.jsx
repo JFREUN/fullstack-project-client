@@ -58,7 +58,7 @@ export default function AddRecipe(props) {
         props.refreshRecipes()
        
       })
-      .catch(err => console.log("Error while adding the new movie: ", err));
+      .catch(err => console.log("Error while adding the new recipe: ", err));
   };
  
 
