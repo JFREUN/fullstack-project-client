@@ -1,21 +1,34 @@
 import React from "react";
-import { useState,useContext } from "react";
+import { useEffect,useState,useContext } from "react";
 import service from "../api/service";
 import { AuthContext } from "./../context/auth.context";
-
+import axios from "axios";
+const API_URL = "http://localhost:5005";
 
 
 export default function AddRecipe(props) {
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [instruction, setInstruction] = useState("");
-  const [ingredients, setIngredients] = useState("");
+  const [ingredients, setIngredients] = useState([]);
   const [cookingTime, setCookingTime] = useState(0);
   const [showForm, setShowForm] = useState(false);
+  const[search, setSearch] = useState([])
+  const storedToken = localStorage.getItem('authToken');
 
   const {user} = useContext(AuthContext);
-  console.log(user)
   
+  useEffect(() => {  
+
+    if (search){
+      axios.get(`${API_URL}/api/ingredients/search?name=${search}`, { headers: { Authorization: `Bearer ${storedToken}` } })
+    .then(response=>{
+      
+      setIngredients(response.data)
+    })
+    .catch(err => console.log("This is a search error:",err))
+    }
+  }, [search])
   
 
   const handleFileUpload = (e) => {
@@ -46,7 +59,7 @@ export default function AddRecipe(props) {
     service
       .createRecipe({ name, ingredients, imageUrl, instruction, cookingTime, userId: user._id })
       .then(res => {
-        console.log("added new recipe: ", res);
+        // console.log("added new recipe: ", res);
  
         // Reset the form
         setCookingTime("");
@@ -60,6 +73,12 @@ export default function AddRecipe(props) {
       })
       .catch(err => console.log("Error while adding the new recipe: ", err));
   };
+
+  const addIngredients = (ingredientId) => {
+    setIngredients(ingredients.push(ingredientId))
+    console.log("Updated list of ingredients:", ingredients)
+    return;
+  }
  
 
   const toggleShowForm = () => {
@@ -82,8 +101,17 @@ export default function AddRecipe(props) {
           <input type="file" onChange={(e) => handleFileUpload(e)} />
         </div>
         <div className="form-group">
-          <label>Ingredients:</label>
-          <textarea id="ingredients" name="ingredients" className="form-input" value={ingredients} onChange={e => setIngredients(e.target.value)} />
+        <label htmlFor="selectIngredients"> Ingredients:</label>
+        <input className="addIngredients" id="selectIngredients" type="text" placeholder="Search Ingredients" value={search} onChange = {(e) => setSearch (e.target.value)} />
+        
+        {ingredients.map(
+          (ingredient) => {
+            return(
+          <div key={ingredient._id} className="searchDiv">
+            <p className="searchP">{ingredient.name}</p>
+            <button className="searchButton" type ="button" onClick={addIngredients(ingredient._id)}>Select</button>
+          </div>)
+        })}
         </div>
         <div className="form-group">
           <label>Instruction:</label>
