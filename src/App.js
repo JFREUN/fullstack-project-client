@@ -11,6 +11,7 @@ import Login from './pages/Login';
 import Navbar from './components/Navbar'; 
 import IsPrivate from "./components/IsPrivate";  
 import IsAnon from "./components/IsAnon"; 
+import FridgePage from './pages/FridgePage';
 
 function App() {
   return (
@@ -27,7 +28,8 @@ function App() {
       <Route path="/recipes/:recipeId" element={<IsPrivate><RecipeDetail/></IsPrivate>}/>
       <Route path="/recipes/edit/:recipeId" element={<IsPrivate><EditRecipe/></IsPrivate>}/>
       <Route path='/meals' element ={<IsPrivate><MealPlan/></IsPrivate>}/>
-      <Route path='meals/edit/:mealId' element={<IsPrivate><EditMeal/></IsPrivate>}/>
+      <Route path='/meals/edit/:mealId' element={<IsPrivate><EditMeal/></IsPrivate>}/>
+      <Route path='/ingredients' element={<IsPrivate><FridgePage/></IsPrivate>}/>
       </Routes>
     </div>
   );
