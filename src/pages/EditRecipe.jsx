@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import service from "../api/service";
 
-const API_URL = "http://localhost:5005";
+const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
 
 export default function EditRecipe() {
   const [name, setName] = useState("");

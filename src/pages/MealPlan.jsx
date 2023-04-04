@@ -7,7 +7,7 @@ import binIcon from "../images/icons8-waste-50.png";
 import editIcon from "../images/icons8-edit-row-96.png"
 
 
-const API_URL = "http://localhost:5005";
+const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
 
 export default function MealPlan() {
   const [meals, setMeals] = useState([]);
