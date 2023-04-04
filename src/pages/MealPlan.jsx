@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate  } from "react-router-dom";
 import AddMeal from "../components/AddMealDay";
 import binIcon from "../images/icons8-waste-50.png";
-import editIcon from "../images/icons8-edit-row-96.png"
+import editIcon from "../images/icons8-edit-row-96.png"; 
+import '../css/styles.css'
 
 
 const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;

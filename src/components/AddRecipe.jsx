@@ -3,6 +3,7 @@ import { useEffect, useState, useContext } from "react";
 import service from "../api/service";
 import { AuthContext } from "./../context/auth.context";
 import axios from "axios";
+import '../css/styles.css'
 const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
 
 export default function AddRecipe(props) {
@@ -17,6 +18,7 @@ export default function AddRecipe(props) {
   const storedToken = localStorage.getItem("authToken");
 
   const { user } = useContext(AuthContext);
+  const ingredientsCopy = [...ingredients];
 
   useEffect(() => {
     if (search) {
@@ -72,7 +74,8 @@ export default function AddRecipe(props) {
       })
       .catch((err) => console.log("Error while adding the new recipe: ", err));
   };
-  const ingredientsCopy = [...ingredients];
+  
+
   const addIngredients = (ingredientId) => {
     console.log(ingredientsCopy);
     ingredientsCopy.splice(0, 0, ingredientId);

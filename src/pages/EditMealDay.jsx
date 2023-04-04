@@ -3,6 +3,7 @@ import React from "react";
 import { useEffect,useState, useContext} from "react";
 import { AuthContext } from "./../context/auth.context";
 import { useParams, useNavigate } from "react-router-dom";
+import '../css/styles.css'
 
 const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
 
