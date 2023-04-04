@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import service from "../api/service";
+import '../css/styles.css'
 
 const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
 

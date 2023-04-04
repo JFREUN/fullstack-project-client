@@ -2,6 +2,9 @@ import axios from "axios";
 import React from "react";
 import { useEffect,useState, useContext} from "react";
 import { AuthContext } from "./../context/auth.context";
+
+import '../css/styles.css'
+
 const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
 
 export default function AddMeal(props) {
@@ -20,10 +23,9 @@ export default function AddMeal(props) {
   const[lunchSearch , setLunchSearch] = useState("");
   const[dinnerSearch , setDinnerSearch] = useState("");
 
-  const [isLoading, setIsLoading] = useState(true);
+
   const storedToken = localStorage.getItem('authToken');
 
-//add isLoading, set a new state to loading, when data is fetched set state to false, initial value true 
 
   const {user} = useContext(AuthContext);
   
@@ -58,8 +60,8 @@ useEffect(() => {
     axios.get(`${API_URL}/api/search?name=${breakfastSearch}`, { headers: { Authorization: `Bearer ${storedToken}` } })
   .then(response=>{
     setAllBreakfasts(response.data)
-    setIsLoading(false)
   })
+  .catch(err => console.log(err))
   }
 }, [breakfastSearch])
 
@@ -70,6 +72,7 @@ useEffect(() => {
   .then(response=>{
     setAllLunches(response.data)
   })
+    .catch(err => console.log(err))
   }
 }, [lunchSearch])
 
@@ -80,6 +83,7 @@ useEffect(() => {
   .then(response=>{
     setAllDinners(response.data)
   })
+  .catch(err => console.log(err))
   }
 }, [dinnerSearch])
 
@@ -104,10 +108,7 @@ useEffect(() => {
         <div className="mealSearch">
         <label className="addMealLabels" htmlFor="selectBreakfast"> Breakfast:</label>
         <input className="addMealInputs" id="selectBreakfast" type="text" placeholder="Search Breakfast" value={breakfastSearch} onChange = {(e) => setBreakfastSearch (e.target.value)} />
-        
-       { isLoading && <p>Page is loading</p>}
-        
-        { !isLoading && allBreakfasts.map(
+     { allBreakfasts.map(
           (oneRecipe) => {
             return(
           <div key={oneRecipe._id} className="searchDiv">
