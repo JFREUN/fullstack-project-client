@@ -2,12 +2,12 @@ import React from 'react'
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
+import '../css/styles.css'
 
 const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
 
-
 function RecipeDetail (props) {
-  const [recipe, setRecipe] = useState(null);
+  const [recipe, setRecipe] = useState("");
   const { recipeId } = useParams();
   
   
@@ -45,7 +45,17 @@ function RecipeDetail (props) {
           <img className='imageDetail' src={recipe.imageUrl} alt="" />
             <div className='recipeContent'>
           <p> Instructions: {recipe.instruction}</p>
-          <p>Ingredients: {recipe.ingredients}</p>
+        
+        <div>
+          {recipe.ingredients.map((ingredient) => {
+            return(
+              <div key={ingredient._id}>
+              <li >{ingredient.name}</li>
+              </div>
+            )
+          })}
+          </div>
+        
           <p>Cooking Time: {recipe.cookingTime}</p>
           </div>
           </div>
