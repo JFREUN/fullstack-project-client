@@ -95,6 +95,23 @@ useEffect(() => {
   return (
     <div>
     <h2>Edit {day}'s meal:</h2>
+    <div className="editMeals">
+      <div>
+      <h3>Breakfast:</h3>
+        <img src={breakfast.imageUrl} alt="" />
+        <p>{breakfast.name}</p>
+      </div>
+      <div>
+      <h3>Lunch:</h3>
+        <img src={lunch.imageUrl} alt="" />
+        <p>{breakfast.name}</p>
+      </div>
+      <div>
+      <h3>Dinnert:</h3>
+        <img src={dinner.imageUrl} alt="" />
+        <p>{dinner.name}</p>
+      </div>
+    </div>
       <form className ="addMealDay" onSubmit={handleSubmit}>
         <label className="addMealLabels" htmlFor="selectDay">Day:</label>
         <select id="selectDay" name="day" value={day} onChange={(e) => setDay(e.target.value)}>

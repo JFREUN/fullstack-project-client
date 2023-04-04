@@ -1,8 +1,10 @@
 import axios from "axios";
 import React from "react";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate  } from "react-router-dom";
 import AddMeal from "../components/AddMealDay";
+import binIcon from "../images/icons8-waste-50.png";
+import editIcon from "../images/icons8-edit-row-96.png"
 
 
 const API_URL = "http://localhost:5005";
@@ -18,13 +20,14 @@ export default function MealPlan() {
   const [friday, setFriday] = useState("");
   const [saturday, setSaturday] = useState("");
   const [sunday, setSunday] = useState("");
+  const storedToken = localStorage.getItem("authToken");
+  const navigate = useNavigate();
 
   const toggleShow = () => {
     setShow(!show);
   };
 
 const getMeals = () =>{
-  const storedToken = localStorage.getItem("authToken");
 
   axios
   .get(`${API_URL}/api/meals`, { headers: { Authorization: `Bearer ${storedToken}` }})
@@ -48,6 +51,14 @@ const getMeals = () =>{
     setSunday(meals.filter((meal) => meal.day === "Sunday")[0]);
   }, [meals])
 
+  const handleDelete = ((dayId) => {
+    axios
+    .delete(`${API_URL}/api/meals/${dayId}`, { headers: { Authorization: `Bearer ${storedToken}` }})
+    .then(() => {
+      console.log("Item was deleted!")
+    })
+    .catch((err) => console.log("This is a delete error: ", err))
+  })
 
 
   return (
@@ -60,10 +71,22 @@ const getMeals = () =>{
           <p>Monday</p>
           {monday && (
             <div className="mealsContainer">
-              <div className="mealDiv">{monday.breakfast.name}</div>
-              <div className="mealDiv">{monday.lunch.name}</div>
-              <div className="mealDiv">{monday.dinner.name}</div>
-              <Link className="mealButton">Edit Monday</Link>
+              <div className="mealDiv">
+               <a href="#">{monday.breakfast.name}</a>
+              <img src={monday.breakfast.imageUrl} alt="" />
+              </div>
+              <div className="mealDiv">
+              <a href="#">{monday.lunch.name}</a>
+              <img src={monday.lunch.imageUrl} alt="" />
+              </div>
+              <div className="mealDiv">
+              <a href="#">{monday.dinner.name}</a>
+              <img src={monday.dinner.imageUrl} alt="" />
+              </div>
+              <div className="buttonsContainer">
+              <Link to={`/meals/edit/${monday._id}`}className="editButton"><img src={editIcon} alt="" /></Link>
+              {/* <button type="button" onClick={handleDelete(monday._id)} className="editButton"><img src={binIcon} alt="" /></button> */}
+              </div>  
             </div>
           ) }
           {!monday && <span>Please add a new meal!</span>}
@@ -73,10 +96,22 @@ const getMeals = () =>{
           <p>Tuesday</p>
           {tuesday && (
             <div className="mealsContainer">
-              <div className="mealDiv">{tuesday.breakfast.name}</div>
-              <div className="mealDiv">{tuesday.lunch.name}</div>
-              <div className="mealDiv">{tuesday.dinner.name}</div>
-              <button className="mealButton">Edit Tuesday</button>
+              <div className="mealDiv">
+               <a href="#">{tuesday.breakfast.name}</a>
+              <img src={tuesday.breakfast.imageUrl} alt="" />
+              </div>
+              <div className="mealDiv">
+              <a href="#">{tuesday.lunch.name}</a>
+              <img src={tuesday.lunch.imageUrl} alt="" />
+              </div>
+              <div className="mealDiv">
+              <a href="#">{tuesday.dinner.name}</a>
+              <img src={tuesday.dinner.imageUrl} alt="" />
+              </div>
+              <div className="buttonsContainer">
+              <Link to={`/meals/edit/${tuesday._id}`}className="editButton"><img src={editIcon} alt="" /></Link>
+              {/* <button type="button" onClick={handleDelete(tuesday._id)} className="editButton"><img src={binIcon} alt="" /></button> */}
+              </div>  
             </div>
           ) }
           {!tuesday && <span>Please add a new meal!</span>}
@@ -86,10 +121,22 @@ const getMeals = () =>{
           <p>Wednesday</p>
           {wednesday && (
             <div className="mealsContainer">
-              <div className="mealDiv">{wednesday.breakfast.name}</div>
-              <div className="mealDiv">{wednesday.lunch.name}</div>
-              <div className="mealDiv">{wednesday.dinner.name}</div>
-              <button className="mealButton">Edit Wednesday</button>
+              <div className="mealDiv">
+               <a href="#">{wednesday.breakfast.name}</a>
+              <img src={wednesday.breakfast.imageUrl} alt="" />
+              </div>
+              <div className="mealDiv">
+              <a href="#">{wednesday.lunch.name}</a>
+              <img src={wednesday.lunch.imageUrl} alt="" />
+              </div>
+              <div className="mealDiv">
+              <a href="#">{wednesday.dinner.name}</a>
+              <img src={wednesday.dinner.imageUrl} alt="" />
+              </div>
+              <div className="buttonsContainer">
+              <Link to={`/meals/edit/${wednesday._id}`}className="editButton"><img src={editIcon} alt="" /></Link>
+              {/* <button type="button" onClick={handleDelete(wednesday._id)} className="editButton"><img src={binIcon} alt="" /></button> */}
+              </div>  
             </div>
           ) }
           {!wednesday && <span>Please add a new meal!</span>}
@@ -98,11 +145,23 @@ const getMeals = () =>{
         <div className="dayColumn">
           <p>Thursday</p>
           {thursday && (
-            <div>
-              <div className="mealDiv">{thursday.breakfast.name}</div>
-              <div className="mealDiv">{thursday.lunch.name}</div>
-              <div className="mealDiv">{thursday.dinner.name}</div>
-              <button className="mealButton">Edit Thursday</button>
+            <div className="mealsContainer">
+              <div className="mealDiv">
+               <a href="#">{thursday.breakfast.name}</a>
+              <img src={thursday.breakfast.imageUrl} alt="" />
+              </div>
+              <div className="mealDiv">
+              <a href="#">{thursday.lunch.name}</a>
+              <img src={thursday.lunch.imageUrl} alt="" />
+              </div>
+              <div className="mealDiv">
+              <a href="#">{thursday.dinner.name}</a>
+              <img src={thursday.dinner.imageUrl} alt="" />
+              </div>
+              <div className="buttonsContainer">
+              <Link to={`/meals/edit/${thursday._id}`}className="editButton"><img src={editIcon} alt="" /></Link>
+              {/* <button type="button" onClick={handleDelete(thursday._id)} className="editButton"><img src={binIcon} alt="" /></button> */}
+              </div>  
             </div>
           ) }
           {!thursday && <span>Please add a new meal!</span>}
@@ -112,10 +171,22 @@ const getMeals = () =>{
           <p>Friday</p>
           {friday && (
             <div className="mealsContainer">
-              <div className="mealDiv">{friday.breakfast.name}</div>
-              <div className="mealDiv">{friday.lunch.name}</div>
-              <div className="mealDiv">{friday.dinner.name}</div>
-              <button className="mealButton">Edit Monday</button>
+              <div className="mealDiv">
+               <a href="#">{friday.breakfast.name}</a>
+              <img src={friday.breakfast.imageUrl} alt="" />
+              </div>
+              <div className="mealDiv">
+              <a href="#">{friday.lunch.name}</a>
+              <img src={friday.lunch.imageUrl} alt="" />
+              </div>
+              <div className="mealDiv">
+              <a href="#">{friday.dinner.name}</a>
+              <img src={friday.dinner.imageUrl} alt="" />
+              </div>
+              <div className="buttonsContainer">
+              <Link to={`/meals/edit/${friday._id}`}className="editButton"><img src={editIcon} alt="" /></Link>
+              {/* <button type="button" onClick={handleDelete(friday._id)} className="editButton"><img src={binIcon} alt="" /></button> */}
+              </div>  
             </div>
           ) }
           {!friday && <span>Please add a new meal!</span>}
@@ -126,10 +197,22 @@ const getMeals = () =>{
           <p>Saturday</p>
           {saturday && (
             <div className="mealsContainer">
-              <div className="mealDiv">{saturday.breakfast.name}</div>
-              <div className="mealDiv">{saturday.lunch.name}</div>
-              <div className="mealDiv">{saturday.dinner.name}</div>
-              <button className="mealButton">Edit Saturday</button>
+              <div className="mealDiv">
+               <a href="#">{saturday.breakfast.name}</a>
+              <img src={saturday.breakfast.imageUrl} alt="" />
+              </div>
+              <div className="mealDiv">
+              <a href="#">{saturday.lunch.name}</a>
+              <img src={saturday.lunch.imageUrl} alt="" />
+              </div>
+              <div className="mealDiv">
+              <a href="#">{saturday.dinner.name}</a>
+              <img src={saturday.dinner.imageUrl} alt="" />
+              </div>
+              <div className="buttonsContainer">
+              <Link to={`/meals/edit/${saturday._id}`}className="editButton"><img src={editIcon} alt="" /></Link>
+              {/* <button type="button" onClick={handleDelete(saturday._id)} className="editButton"><img src={binIcon} alt="" /></button> */}
+              </div>  
             </div>
           ) }
           {!saturday && <span>Please add a new meal!</span>}
@@ -139,10 +222,22 @@ const getMeals = () =>{
           <p>Sunday</p>
           {sunday && (
             <div className="mealsContainer">
-              <div className="mealDiv">{sunday.breakfast.name}</div>
-              <div className="mealDiv">{sunday.lunch.name}</div>
-              <div className="mealDiv">{sunday.dinner.name}</div>
-              <button className="mealButton">Edit Sunday</button>
+              <div className="mealDiv">
+               <a href="#">{sunday.breakfast.name}</a>
+              <img src={sunday.breakfast.imageUrl} alt="" />
+              </div>
+              <div className="mealDiv">
+              <a href="#">{sunday.lunch.name}</a>
+              <img src={sunday.lunch.imageUrl} alt="" />
+              </div>
+              <div className="mealDiv">
+              <a href="#">{sunday.dinner.name}</a>
+              <img src={sunday.dinner.imageUrl} alt="" />
+              </div>
+              <div className="buttonsContainer">
+              <Link to={`/meals/edit/${sunday._id}`}className="editButton"><img src={editIcon} alt="" /></Link>
+              {/* <button type="button" onClick={handleDelete(sunday._id)} className="editButton"><img src={binIcon} alt="" /></button> */}
+              </div>  
             </div>
           ) }
           {!sunday && <span>Please add a new meal!</span>}

@@ -124,11 +124,10 @@ align-items: center;
   justify-content: stretch;
   border-radius: 10px;
   background-color: #F4F9F4;
-
+  padding-bottom: 20px;
 }
 
 .dayColumn{
-  height: 500px;
   width: 20%;
   border-radius: 10px;
 }
@@ -147,6 +146,16 @@ align-items: center;
   margin: 10px;
 }
 
+.mealDiv img{
+  aspect-ratio: 2/1;
+  max-width:150px;
+object-fit: cover;
+}
+.mealDiv a {
+  text-decoration: none;
+  color: black;
+}
+
 .mealsContainer{
   width: 100%;
 }
@@ -160,9 +169,51 @@ align-items: center;
   color: #F4F9F4;
   margin-top: 20px;
 }
+.buttonsContainer{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+.editButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-style: none;
+  background-color: #5C8D89;
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  color: #F4F9F4;
+  margin: 0 10px;
+}
+
+.editButton img{
+  width: 30px;
+  height: 30px;
+}
 
 /* Edit Mealday */
 .editMealLabels{
   display: block;
   width: 100%
+}
+
+.editMeals{
+  display: flex;
+  width: 75%; 
+  margin: 0 auto;
+  justify-content: space-around;
+}
+
+.editMeals p{
+  margin: 5px 0;
+}
+.editMeals h3{
+  margin: 10px 0;
+}
+.editMeals img{
+  width: 200px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
 }
