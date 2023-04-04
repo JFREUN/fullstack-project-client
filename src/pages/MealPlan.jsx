@@ -85,7 +85,7 @@ const getMeals = () =>{
               </div>
               <div className="buttonsContainer">
               <Link to={`/meals/edit/${monday._id}`}className="editButton"><img src={editIcon} alt="" /></Link>
-              {/* <button type="button" onClick={handleDelete(monday._id)} className="editButton"><img src={binIcon} alt="" /></button> */}
+              <button type="button" onClick={() => handleDelete(monday._id)} className="editButton"><img src={binIcon} alt="" /></button>
               </div>  
             </div>
           ) }
@@ -110,7 +110,7 @@ const getMeals = () =>{
               </div>
               <div className="buttonsContainer">
               <Link to={`/meals/edit/${tuesday._id}`}className="editButton"><img src={editIcon} alt="" /></Link>
-              {/* <button type="button" onClick={handleDelete(tuesday._id)} className="editButton"><img src={binIcon} alt="" /></button> */}
+              <button type="button" onClick={() => handleDelete(tuesday._id)} className="editButton"><img src={binIcon} alt="" /></button>
               </div>  
             </div>
           ) }
@@ -135,7 +135,7 @@ const getMeals = () =>{
               </div>
               <div className="buttonsContainer">
               <Link to={`/meals/edit/${wednesday._id}`}className="editButton"><img src={editIcon} alt="" /></Link>
-              {/* <button type="button" onClick={handleDelete(wednesday._id)} className="editButton"><img src={binIcon} alt="" /></button> */}
+              <button type="button" onClick={()=> handleDelete(wednesday._id)} className="editButton"><img src={binIcon} alt="" /></button>
               </div>  
             </div>
           ) }
@@ -160,7 +160,7 @@ const getMeals = () =>{
               </div>
               <div className="buttonsContainer">
               <Link to={`/meals/edit/${thursday._id}`}className="editButton"><img src={editIcon} alt="" /></Link>
-              {/* <button type="button" onClick={handleDelete(thursday._id)} className="editButton"><img src={binIcon} alt="" /></button> */}
+              <button type="button" onClick={() => handleDelete(thursday._id)} className="editButton"><img src={binIcon} alt="" /></button>
               </div>  
             </div>
           ) }
@@ -185,7 +185,7 @@ const getMeals = () =>{
               </div>
               <div className="buttonsContainer">
               <Link to={`/meals/edit/${friday._id}`}className="editButton"><img src={editIcon} alt="" /></Link>
-              {/* <button type="button" onClick={handleDelete(friday._id)} className="editButton"><img src={binIcon} alt="" /></button> */}
+              <button type="button" onClick={() => handleDelete(friday._id)} className="editButton"><img src={binIcon} alt="" /></button>
               </div>  
             </div>
           ) }
@@ -211,7 +211,7 @@ const getMeals = () =>{
               </div>
               <div className="buttonsContainer">
               <Link to={`/meals/edit/${saturday._id}`}className="editButton"><img src={editIcon} alt="" /></Link>
-              {/* <button type="button" onClick={handleDelete(saturday._id)} className="editButton"><img src={binIcon} alt="" /></button> */}
+              <button type="button" onClick={() => handleDelete(saturday._id)} className="editButton"><img src={binIcon} alt="" /></button>
               </div>  
             </div>
           ) }
@@ -236,7 +236,7 @@ const getMeals = () =>{
               </div>
               <div className="buttonsContainer">
               <Link to={`/meals/edit/${sunday._id}`}className="editButton"><img src={editIcon} alt="" /></Link>
-              {/* <button type="button" onClick={handleDelete(sunday._id)} className="editButton"><img src={binIcon} alt="" /></button> */}
+              <button type="button" onClick={() => handleDelete(sunday._id)} className="editButton"><img src={binIcon} alt="" /></button>
               </div>  
             </div>
           ) }

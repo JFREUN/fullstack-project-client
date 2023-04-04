@@ -58,6 +58,7 @@ useEffect(() => {
   .then(response=>{
     setAllBreakfasts(response.data)
   })
+  .catch(err => console.log(err))
   }
 }, [breakfastSearch])
 
@@ -68,6 +69,7 @@ useEffect(() => {
   .then(response=>{
     setAllLunches(response.data)
   })
+    .catch(err => console.log(err))
   }
 }, [lunchSearch])
 
@@ -78,6 +80,7 @@ useEffect(() => {
   .then(response=>{
     setAllDinners(response.data)
   })
+  .catch(err => console.log(err))
   }
 }, [dinnerSearch])
 
