@@ -30,6 +30,12 @@ function Navbar() {
                 Recipes
               </Link>
             </li>
+
+            <li className="nav-item">
+              <Link to="/ingredients" className="nav-link">
+              Fridge
+              </Link>
+            </li>
             
             <li className="nav-item">
               <Link onClick={logOutUser} className="nav-link logout-link">

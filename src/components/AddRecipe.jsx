@@ -11,6 +11,7 @@ export default function AddRecipe(props) {
   const [imageUrl, setImageUrl] = useState("");
   const [instruction, setInstruction] = useState("");
   const [ingredients, setIngredients] = useState([]);
+  const[allIngredients, setAllIngredients] = useState([]);
   const [cookingTime, setCookingTime] = useState(0);
   const [showForm, setShowForm] = useState(false);
   const[search, setSearch] = useState([])
@@ -24,7 +25,8 @@ export default function AddRecipe(props) {
       axios.get(`${API_URL}/api/ingredients/search?name=${search}`, { headers: { Authorization: `Bearer ${storedToken}` } })
     .then(response=>{
       
-      setIngredients(response.data)
+      setAllIngredients(response.data)
+      
     })
     .catch(err => console.log("This is a search error:",err))
     }
@@ -59,12 +61,12 @@ export default function AddRecipe(props) {
     service
       .createRecipe({ name, ingredients, imageUrl, instruction, cookingTime, userId: user._id })
       .then(res => {
-        // console.log("added new recipe: ", res);
+        console.log("added new recipe: ", res);
  
         // Reset the form
         setCookingTime("");
         setImageUrl("");
-        setIngredients("");
+        setIngredients([]);
         setInstruction("");
         setName("");
       
@@ -73,11 +75,15 @@ export default function AddRecipe(props) {
       })
       .catch(err => console.log("Error while adding the new recipe: ", err));
   };
-
+  const ingredientsCopy = [...ingredients]
   const addIngredients = (ingredientId) => {
-    setIngredients(ingredients.push(ingredientId))
-    console.log("Updated list of ingredients:", ingredients)
-    return;
+    console.log(ingredientsCopy)
+    ingredientsCopy.splice(0, 0, ingredientId)
+    setIngredients(ingredientsCopy)
+   
+    
+    
+  
   }
  
 
@@ -103,15 +109,17 @@ export default function AddRecipe(props) {
         <div className="form-group">
         <label htmlFor="selectIngredients"> Ingredients:</label>
         <input className="addIngredients" id="selectIngredients" type="text" placeholder="Search Ingredients" value={search} onChange = {(e) => setSearch (e.target.value)} />
-        
-        {ingredients.map(
-          (ingredient) => {
-            return(
-          <div key={ingredient._id} className="searchDiv">
-            <p className="searchP">{ingredient.name}</p>
-            <button className="searchButton" type ="button" onClick={addIngredients(ingredient._id)}>Select</button>
-          </div>)
-        })}
+        <div>
+        {allIngredients.map((ingredient )=> {
+          
+          return(<div key={ingredient._id} className="searchDiv">
+          <div  className="searchP">{ingredient.name}</div>
+          <button className="searchButton" type="button"  onClick={()=> addIngredients(ingredient._id)}>Select</button>
+          
+        </div>)
+  
+})}
+</div>
         </div>
         <div className="form-group">
           <label>Instruction:</label>
