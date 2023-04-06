@@ -32,6 +32,8 @@ export default function AddRecipe(props) {
           headers: { Authorization: `Bearer ${storedToken}` },
         })
         .then((response) => {
+<<<<<<<<< Temporary merge branch 1
+          
           setAllIngredients(response.data);
         })
         .catch((err) => console.log("This is a search error:", err));
@@ -113,6 +115,7 @@ export default function AddRecipe(props) {
               <input type="file" onChange={(e) => handleFileUpload(e)} />
             </div>
             <div className="form-group">
+
               <label htmlFor="selectIngredients"> Ingredients:</label>
               <input
                 className="addIngredients"
@@ -139,6 +142,7 @@ export default function AddRecipe(props) {
                 })}
              
             </div>
+
             <div className="form-group">
               <label>Instruction:</label>
               <textarea
