@@ -3,8 +3,12 @@ import { useEffect, useState, useContext } from "react";
 import service from "../api/service";
 import { AuthContext } from "./../context/auth.context";
 import axios from "axios";
+
+
+
 import '../css/styles.css'
 const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
+
 
 export default function AddRecipe(props) {
   const [name, setName] = useState("");
@@ -28,7 +32,8 @@ export default function AddRecipe(props) {
           headers: { Authorization: `Bearer ${storedToken}` },
         })
         .then((response) => {
-          setAllIngredients([response.data]);
+
+          setAllIngredients(response.data);
         })
         .catch((err) => console.log("This is a search error:", err));
     }
@@ -109,6 +114,7 @@ export default function AddRecipe(props) {
               <input type="file" onChange={(e) => handleFileUpload(e)} />
             </div>
             <div className="form-group">
+
               <label htmlFor="selectIngredients"> Ingredients:</label>
               <input
                 className="addIngredients"
@@ -135,6 +141,7 @@ export default function AddRecipe(props) {
                 })}
              
             </div>
+
             <div className="form-group">
               <label>Instruction:</label>
               <textarea
