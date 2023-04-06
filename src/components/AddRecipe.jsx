@@ -32,7 +32,6 @@ export default function AddRecipe(props) {
           headers: { Authorization: `Bearer ${storedToken}` },
         })
         .then((response) => {
-<<<<<<<<< Temporary merge branch 1
           
           setAllIngredients(response.data);
         })
