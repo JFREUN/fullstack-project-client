@@ -19,6 +19,7 @@ export default function AddRecipe(props) {
 
   const { user } = useContext(AuthContext);
   const ingredientsCopy = [...ingredients];
+  
 
   useEffect(() => {
     if (search) {
@@ -27,7 +28,7 @@ export default function AddRecipe(props) {
           headers: { Authorization: `Bearer ${storedToken}` },
         })
         .then((response) => {
-          setAllIngredients(response.data);
+          setAllIngredients([response.data]);
         })
         .catch((err) => console.log("This is a search error:", err));
     }
@@ -118,7 +119,7 @@ export default function AddRecipe(props) {
                 onChange={(e) => setSearch(e.target.value)}
               />
               
-              { allIngredients.map((ingredient) => {
+              { allIngredients && allIngredients.map((ingredient) => {
                   return (
                     <div key={ingredient._id} className="searchDiv">
                       <div className="searchP">{ingredient.name}</div>
