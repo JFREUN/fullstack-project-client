@@ -46,15 +46,15 @@ function RecipeDetail (props) {
             <div className='recipeContent'>
           <p> Instructions: {recipe.instruction}</p>
         
-        <div>
-          {recipe.ingredients.map((ingredient) => {
+          <div>
+          {recipe.ingredients && recipe.ingredients.map((ingredient) => {
             return(
               <div key={ingredient._id}>
-              <li >{ingredient.name}</li>
+                <li >{ingredient.name}</li>
               </div>
             )
           })}
-          </div>
+        </div>
         
           <p>Cooking Time: {recipe.cookingTime}</p>
           </div>

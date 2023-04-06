@@ -3,8 +3,12 @@ import { useEffect, useState, useContext } from "react";
 import service from "../api/service";
 import { AuthContext } from "./../context/auth.context";
 import axios from "axios";
+
+
+
 import '../css/styles.css'
 const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
+
 
 export default function AddRecipe(props) {
   const [name, setName] = useState("");
@@ -27,6 +31,7 @@ export default function AddRecipe(props) {
           headers: { Authorization: `Bearer ${storedToken}` },
         })
         .then((response) => {
+          
           setAllIngredients(response.data);
         })
         .catch((err) => console.log("This is a search error:", err));
@@ -108,32 +113,32 @@ export default function AddRecipe(props) {
               <input type="file" onChange={(e) => handleFileUpload(e)} />
             </div>
             <div className="form-group">
-              <label htmlFor="selectIngredients"> Ingredients:</label>
-              <input
-                className="addIngredients"
-                id="selectIngredients"
-                type="text"
-                placeholder="Search Ingredients"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
-              
-              { allIngredients.map((ingredient) => {
-                  return (
-                    <div key={ingredient._id} className="searchDiv">
-                      <div className="searchP">{ingredient.name}</div>
-                      <button
-                        className="searchButton"
-                        type="button"
-                        onClick={() => addIngredients(ingredient._id)}
-                      >
-                        Select
-                      </button>
-                    </div>
-                  );
-                })}
-             
-            </div>
+  <label htmlFor="selectIngredients"> Ingredients:</label>
+  <input
+    className="addIngredients"
+    id="selectIngredients"
+    type="text"
+    placeholder="Search Ingredients"
+    value={search}
+    onChange={(e) => setSearch(e.target.value)}
+  />
+  <div className="ingredient-list">
+    {allIngredients.map((ingredient) => {
+      return (
+        <div key={ingredient._id} className="searchDiv">
+          <div className="searchP">{ingredient.name}</div>
+          <button
+            className="searchButton"
+            type="button"
+            onClick={() => addIngredients(ingredient._id)}
+          >
+            Select
+          </button>
+        </div>
+      );
+    })}
+  </div>
+</div>
             <div className="form-group">
               <label>Instruction:</label>
               <textarea

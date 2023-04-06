@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import service from "../api/service";
 import '../css/styles.css'
 
+
 const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
 
 export default function EditRecipe() {
@@ -13,13 +14,20 @@ export default function EditRecipe() {
   const [instruction, setInstruction] = useState("");
   const [ingredients, setIngredients] = useState("");
   const [cookingTime, setCookingTime] = useState(0);
+  const [allIngredients, setAllIngredients] = useState([]);
+  const [search, setSearch] = useState([]);
 
   const navigate = useNavigate();
 
   const { recipeId } = useParams();
+  const storedToken = localStorage.getItem("authToken");
+
+  const ingredientsCopy = [...ingredients];
+
+
 
   useEffect(() => {
-    const storedToken = localStorage.getItem("authToken");
+    
     axios
       .get(
         `${API_URL}/api/recipes/${recipeId}`,
@@ -35,7 +43,23 @@ export default function EditRecipe() {
         setCookingTime(oneRecipe.cookingTime);
       })
       .catch((error) => console.log(error));
-  }, [recipeId]);
+ 
+
+    })
+
+    useEffect(() => {
+      if (search) {
+        axios
+          .get(`${API_URL}/api/ingredients/search?name=${search}`, {
+            headers: { Authorization: `Bearer ${storedToken}` },
+          })
+          .then((response) => {
+            
+            setAllIngredients(response.data);
+          })
+          .catch((err) => console.log("This is a search error:", err));
+      }
+    }, [search]);
 
   const handleFileUpload = (e) => {
     // console.log("The file to be uploaded is: ", e.target.files[0]);
@@ -56,6 +80,10 @@ export default function EditRecipe() {
       .catch((err) => console.log("Error while uploading the file: ", err));
   };
 
+ 
+
+
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const requestBody = {
@@ -66,10 +94,9 @@ export default function EditRecipe() {
       cookingTime,
     };
 
-    // Get the token from the localStorage
-    const storedToken = localStorage.getItem('authToken');
+    
 
-    // Send the token through the request "Authorization" Headers
+ 
     axios
       .put(
         `${API_URL}/api/recipes/${recipeId}`,
@@ -95,7 +122,15 @@ export default function EditRecipe() {
       .catch((err) => console.log(err));
   };
 
+
+  const addIngredients = (ingredientId) => {
+    console.log(ingredientsCopy);
+    ingredientsCopy.splice(0, 0, ingredientId);
+    setIngredients(ingredientsCopy);
+  };
+
   return (
+    
      <div className="form-container-edit">
        <div className="form-group-edit">
       <form onSubmit={handleFormSubmit}>
@@ -125,14 +160,32 @@ export default function EditRecipe() {
         />
         </div>
         <div className="form-group-edit">
-        <label>Ingredients:</label>
-        <input
-          type="text"
-          name="ingredients"
-          value={ingredients}
-          onChange={(e) => setIngredients(e.target.value)}
-        />
+  <label htmlFor="selectIngredients"> Ingredients:</label>
+  <input
+    className="addIngredients"
+    id="selectIngredients"
+    type="text"
+    placeholder="Search Ingredients"
+    value={search}
+    onChange={(e) => setSearch(e.target.value)}
+  />
+  <div className="ingredient-list">
+    {allIngredients.map((ingredient) => {
+      return (
+        <div key={ingredient._id} className="searchDiv">
+          <div className="searchP">{ingredient.name}</div>
+          <button
+            className="searchButton"
+            type="button"
+            onClick={() => addIngredients(ingredient._id)}
+          >
+            Select
+          </button>
         </div>
+      );
+    })}
+  </div>
+</div>
         <div className="form-group-edit">
         <label>Cooking Time:</label>
         <input
@@ -144,11 +197,8 @@ export default function EditRecipe() {
         </div>
         <button type="submit">Update Recipe</button>
          <button className="recipebtn" onClick={deleteRecipe}>Delete Recipe</button>
-      </form>
+         </form>
      
     </div>
-   </div>
-   
-  );
-  
-}
+  </div>
+  )}
