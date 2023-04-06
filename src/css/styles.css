@@ -459,3 +459,7 @@ object-fit: cover;
 }
 
 
+.ingredient-list {
+  max-height: 150px; /* set a maximum height */
+  overflow-y: scroll; /* add scroll when the height exceeds max-height */
+}

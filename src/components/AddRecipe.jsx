@@ -3,8 +3,12 @@ import { useEffect, useState, useContext } from "react";
 import service from "../api/service";
 import { AuthContext } from "./../context/auth.context";
 import axios from "axios";
+
+
+
 import '../css/styles.css'
 const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
+
 
 export default function AddRecipe(props) {
   const [name, setName] = useState("");
@@ -28,7 +32,7 @@ export default function AddRecipe(props) {
           headers: { Authorization: `Bearer ${storedToken}` },
         })
         .then((response) => {
-          setAllIngredients([response.data]);
+          setAllIngredients(response.data);
         })
         .catch((err) => console.log("This is a search error:", err));
     }
@@ -119,7 +123,7 @@ export default function AddRecipe(props) {
                 onChange={(e) => setSearch(e.target.value)}
               />
               
-              { allIngredients && allIngredients.map((ingredient) => {
+              { allIngredients.map((ingredient) => {
                   return (
                     <div key={ingredient._id} className="searchDiv">
                       <div className="searchP">{ingredient.name}</div>
