@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "./../context/auth.context";
 import "../css/styles.css";
-import logo from "../images/dyner-low-resolution-logo-color-on-transparent-background.png"
+import logo from "../images/dyner-low-resolution-logo-color-on-transparent-background.png";
 
 function Navbar() {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
@@ -10,9 +10,8 @@ function Navbar() {
   return (
     <nav className="navbar">
       <ul className="navbar-nav">
-      <img src={logo} alt="logo" className="App-logo" />
+        <img src={logo} alt="logo" className="App-logo" />
         <li className="nav-item">
-       
           <Link to="/" className="nav-link">
             Home
           </Link>
@@ -33,10 +32,10 @@ function Navbar() {
 
             <li className="nav-item">
               <Link to="/ingredients" className="nav-link">
-              Fridge
+                Fridge
               </Link>
             </li>
-            
+
             <li className="nav-item">
               <Link onClick={logOutUser} className="nav-link logout-link">
                 Logout
@@ -59,7 +58,6 @@ function Navbar() {
                 Login
               </Link>
             </li>
-            
           </>
         )}
       </ul>

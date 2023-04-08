@@ -1,9 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import "../css/styles.css";
+
 import axios from "axios";
 import "../css/styles.css";
 import ShoppingList from "../components/ShoppingList";
+
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5005";
 
@@ -19,6 +21,7 @@ export default function FridgePage() {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
+
         const ingredientCopy = response.data.splice(0, 20);
         setIngredients(ingredientCopy);
       })
@@ -28,6 +31,7 @@ export default function FridgePage() {
   useEffect(() => {
     refreshIngredients();
   }, []);
+
 
   const handleInstock = (id) => {
     const requestBody = {
@@ -99,6 +103,7 @@ export default function FridgePage() {
               ))}
           </tbody>
         </table>
+
       </div>
     </div>
   );
