@@ -173,11 +173,11 @@ color: #207d6e ;
   text-decoration: none;
   margin-right: 20px;
   font-weight: bold;
-  font-size: 1.6rem;
+  font-size: 16px;
 }
 
 .nav-link:hover {
-  color: hotpink;
+  color: #74B49B;
 }
 
 @media only screen and (max-width: 768px) {
