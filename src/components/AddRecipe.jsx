@@ -29,7 +29,7 @@ export default function AddRecipe(props) {
           headers: { Authorization: `Bearer ${storedToken}` },
         })
         .then((response) => {
-
+          
           setAllIngredients(response.data);
         })
         .catch((err) => console.log("This is a search error:", err));
@@ -121,6 +121,7 @@ export default function AddRecipe(props) {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
+
 
               <div className="ingredient-list">
                 {allIngredients.map((ingredient) => {

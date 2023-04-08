@@ -22,6 +22,7 @@ function Login(props) {
     e.preventDefault();
     const requestBody = { email, password };
 
+
     axios
       .post(`${API_URL}/auth/login`, requestBody)
       .then((response) => {

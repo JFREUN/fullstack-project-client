@@ -40,7 +40,9 @@ export default function EditRecipe() {
         setCookingTime(oneRecipe.cookingTime);
       })
       .catch((error) => console.log(error));
+
   }, []);
+
 
   useEffect(() => {
     if (search) {
@@ -118,6 +120,7 @@ export default function EditRecipe() {
 
   return (
     <div className="form-container-edit">
+    
       <div className="form-group-edit">
         <form onSubmit={handleFormSubmit}>
           <h1>{name}</h1>
