@@ -15,7 +15,7 @@ const errorHandler = (err) => {
 const getRecipes = () => {
   const storedToken = localStorage.getItem('authToken');
 
-  return api.get("/recipes", { headers: { Authorization: `Bearer ${storedToken}` } })
+  return api.get("/api/recipes", { headers: { Authorization: `Bearer ${storedToken}` } })
     .then((res) => res.data)
     .catch(errorHandler);
 };
@@ -23,7 +23,7 @@ const getRecipes = () => {
 const uploadImage = (file) => {
   const storedToken = localStorage.getItem('authToken');
 
-  return api.post("/upload", file, { headers: { Authorization: `Bearer ${storedToken}` } })
+  return api.post("/api/upload", file, { headers: { Authorization: `Bearer ${storedToken}` } })
     .then(res => res.data)
     .catch(errorHandler);
 };
@@ -31,7 +31,7 @@ const uploadImage = (file) => {
 const createRecipe = (newRecipe) => {
   const storedToken = localStorage.getItem('authToken');
 
-  return api.post("/recipes", newRecipe, { headers: { Authorization: `Bearer ${storedToken}` } })
+  return api.post("/api/recipes", newRecipe, { headers: { Authorization: `Bearer ${storedToken}` } })
     .then(res => res.data)
     .catch(errorHandler);
 };
