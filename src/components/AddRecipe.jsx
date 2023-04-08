@@ -4,11 +4,8 @@ import service from "../api/service";
 import { AuthContext } from "./../context/auth.context";
 import axios from "axios";
 
-
-
-import '../css/styles.css'
-const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
-
+import "../css/styles.css";
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5005";
 
 export default function AddRecipe(props) {
   const [name, setName] = useState("");
@@ -80,7 +77,6 @@ export default function AddRecipe(props) {
       })
       .catch((err) => console.log("Error while adding the new recipe: ", err));
   };
-  
 
   const addIngredients = (ingredientId) => {
     console.log(ingredientsCopy);
@@ -117,16 +113,18 @@ export default function AddRecipe(props) {
 
               <label htmlFor="selectIngredients"> Ingredients:</label>
               <input
-                className="addIngredients"
+                className="addIngredients  hidden"
+
                 id="selectIngredients"
                 type="text"
                 placeholder="Search Ingredients"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
-              
-              { allIngredients && allIngredients.map((ingredient) => {
-                  return (
+
+              <div className="ingredient-list">
+                {allIngredients.map((ingredient) => {
+      return (
                     <div key={ingredient._id} className="searchDiv">
                       <div className="searchP">{ingredient.name}</div>
                       <button
@@ -139,7 +137,34 @@ export default function AddRecipe(props) {
                     </div>
                   );
                 })}
-             
+
+              </div>
+              <div className="form-group">
+                <div className="ingredient-list">
+                  {ingredients.map((ingredient) => {
+                    const ingredientName = allIngredients.find(
+                      (i) => i._id === ingredient
+                    )?.name;
+                    return (
+                      <div key={ingredient._id} className="ingredientDiv">
+                        <div className="ingredientP">{ingredientName}</div>
+                        <button
+                          className="deselectButton"
+                          type="button"
+                          onClick={() => {
+                            const newIngredients = ingredients.filter(
+                              (i) => i !== ingredient
+                            );
+                            setIngredients(newIngredients);
+                          }}
+                        >
+                          Deselect
+                        </button>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
 
             <div className="form-group">
