@@ -21,7 +21,6 @@ export default function MealPlan() {
   const [saturday, setSaturday] = useState("");
   const [sunday, setSunday] = useState("");
   const storedToken = localStorage.getItem("authToken");
-  const navigate = useNavigate();
 
   const toggleShow = () => {
     setShow(!show);
@@ -43,6 +42,7 @@ export default function MealPlan() {
   }, []);
 
   useEffect(() => {
+
     setMonday(meals.filter((meal) => meal.day === "Monday")[0]);
     setTuesday(meals.filter((meal) => meal.day === "Tuesday")[0]);
     setWednesday(meals.filter((meal) => meal.day === "Wednesday")[0]);
@@ -51,6 +51,7 @@ export default function MealPlan() {
     setSaturday(meals.filter((meal) => meal.day === "Saturday")[0]);
     setSunday(meals.filter((meal) => meal.day === "Sunday")[0]);
   }, [meals]);
+
 
   const handleDelete = (dayId) => {
     axios
