@@ -193,6 +193,7 @@ p {
 
 .form-group-edit {
   display: flex;
+  width: 50%;
   flex-direction: row;
   justify-content: center;
 }
@@ -204,11 +205,18 @@ form {
 
 .form-container-edit {
   width: 100%;
+  display: flex;
   background-color: #65e0a915;
+  justify-content: center;
 }
 
 .edit-recipe-img {
-  width: 100%;
+  width: 80%;
+  height: 200px;
+  object-fit: cover;
+}
+.edit-details{
+  width: 50%;
 }
 
 .recipeDetails {
@@ -463,3 +471,63 @@ object-fit: cover;
   max-height: 150px; /* set a maximum height */
   overflow-y: scroll; /* add scroll when the height exceeds max-height */
 }
+
+/* Fridge Page */
+
+.ingredientsContainer{
+  width: 60%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ingredientsList{
+  border-radius: 10px;
+  padding: 0 20px;
+  background-color: rgba(167, 215, 197, 0.5);
+  border-collapse: separate;
+  border-spacing: 10px 10px;
+  width: 80%;
+}
+
+.ingredientsList th {
+  padding: 10px;
+  margin: 0;
+}
+
+.ingredientsList td {
+  padding: 10px;
+  margin: 10px 10px;
+  background-color: #F4F9F4;
+  border-radius: 10px;
+}
+
+.ingredientsList button{
+  border-style: none;
+  padding: 5px 0;
+  width: 40px;
+  border-radius: 5px;
+  color: white
+}
+
+.placeholder{
+  width: 40%;
+}
+
+.fridgeSection{
+  display: flex;
+  padding: 0 50px;
+}
+
+/* Shopping List */
+
+.shoppingList{
+  width: 25%; 
+  margin: 20px auto;
+  background-color: #F4F9F4;
+  border-radius: 10px;
+  height: 500px;
+}
+
+

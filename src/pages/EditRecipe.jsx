@@ -3,10 +3,9 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import service from "../api/service";
-import '../css/styles.css'
+import "../css/styles.css";
 
-
-const API_URL = process.env.REACT_APP_API_URL ||'http://localhost:5005' ;
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5005";
 
 export default function EditRecipe() {
   const [name, setName] = useState("");
@@ -24,15 +23,11 @@ export default function EditRecipe() {
 
   const ingredientsCopy = [...ingredients];
 
-
-
   useEffect(() => {
-    
     axios
-      .get(
-        `${API_URL}/api/recipes/${recipeId}`,
-        { headers: { Authorization: `Bearer ${storedToken}` } }  
-        )
+      .get(`${API_URL}/api/recipes/${recipeId}`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
 
       .then((response) => {
         const oneRecipe = response.data;
@@ -43,23 +38,20 @@ export default function EditRecipe() {
         setCookingTime(oneRecipe.cookingTime);
       })
       .catch((error) => console.log(error));
- 
+  });
 
-    })
-
-    useEffect(() => {
-      if (search) {
-        axios
-          .get(`${API_URL}/api/ingredients/search?name=${search}`, {
-            headers: { Authorization: `Bearer ${storedToken}` },
-          })
-          .then((response) => {
-            
-            setAllIngredients(response.data);
-          })
-          .catch((err) => console.log("This is a search error:", err));
-      }
-    }, [search]);
+  useEffect(() => {
+    if (search) {
+      axios
+        .get(`${API_URL}/api/ingredients/search?name=${search}`, {
+          headers: { Authorization: `Bearer ${storedToken}` },
+        })
+        .then((response) => {
+          setAllIngredients(response.data);
+        })
+        .catch((err) => console.log("This is a search error:", err));
+    }
+  }, [search]);
 
   const handleFileUpload = (e) => {
     // console.log("The file to be uploaded is: ", e.target.files[0]);
@@ -80,10 +72,6 @@ export default function EditRecipe() {
       .catch((err) => console.log("Error while uploading the file: ", err));
   };
 
- 
-
-
-
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const requestBody = {
@@ -94,15 +82,10 @@ export default function EditRecipe() {
       cookingTime,
     };
 
-    
-
- 
     axios
-      .put(
-        `${API_URL}/api/recipes/${recipeId}`,
-        requestBody,
-         { headers: { Authorization: `Bearer ${storedToken}` } }
-      )
+      .put(`${API_URL}/api/recipes/${recipeId}`, requestBody, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
       .then((response) => {
         navigate(`/recipes/${recipeId}`);
       });
@@ -110,18 +93,16 @@ export default function EditRecipe() {
 
   const deleteRecipe = () => {
     // Get the token from the localStorage
-     const storedToken = localStorage.getItem('authToken');
+    const storedToken = localStorage.getItem("authToken");
 
     // Send the token through the request "Authorization" Headers
     axios
-      .delete(
-        `${API_URL}/api/recipes/${recipeId}`,
-        { headers: { Authorization: `Bearer ${storedToken}` } }
-      )
+      .delete(`${API_URL}/api/recipes/${recipeId}`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
       .then(() => navigate("/recipes"))
       .catch((err) => console.log(err));
   };
-
 
   const addIngredients = (ingredientId) => {
     console.log(ingredientsCopy);
@@ -130,75 +111,85 @@ export default function EditRecipe() {
   };
 
   return (
-    
-     <div className="form-container-edit">
-       <div className="form-group-edit">
-      <form onSubmit={handleFormSubmit}>
-        
-        <img className="edit-recipe-img" src={imageUrl} alt="recipe" />
-        
-         <div className="form-group-edit">
-        <label>Name:</label>
-        <input
-          type="text"
-          name="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        </div>
-        <div className="form-group-edit">
-        <label>Image:</label>
-        <input  type="file" onChange={(e) => handleFileUpload(e)} />
-        </div>
-         <div className="form-group-edit">
-        <label>Instruction:</label>
-        <input
-          type="text"
-          name="instruction"
-          value={instruction}
-          onChange={(e) => setInstruction(e.target.value)}
-        />
-        </div>
-        <div className="form-group-edit">
-  <label htmlFor="selectIngredients"> Ingredients:</label>
-  <input
-    className="addIngredients"
-    id="selectIngredients"
-    type="text"
-    placeholder="Search Ingredients"
-    value={search}
-    onChange={(e) => setSearch(e.target.value)}
-  />
-  <div className="ingredient-list">
-    {allIngredients.map((ingredient) => {
-      return (
-        <div key={ingredient._id} className="searchDiv">
-          <div className="searchP">{ingredient.name}</div>
-          <button
-            className="searchButton"
-            type="button"
-            onClick={() => addIngredients(ingredient._id)}
-          >
-            Select
-          </button>
-        </div>
-      );
-    })}
-  </div>
+    <div className="form-container-edit">
+    <div className="edit-details">
+      <img className="edit-recipe-img" src={imageUrl} alt="recipe" />
+      <p>Instructions:{instruction}</p>
+      <p>Ingredients:</p>
+      {ingredients && ingredients.map((ingredient) => {
+        return(
+          <li key={ingredient._id}>{ingredient.name}</li>
+        )
+      })}
+      <p>Cooking Time: {cookingTime}</p>
 </div>
-        <div className="form-group-edit">
-        <label>Cooking Time:</label>
-        <input
-          type="text"
-          name="cookingTime"
-          value={cookingTime}
-          onChange={(e) => setCookingTime(e.target.value)}
-        />
-        </div>
-        <button type="submit">Update Recipe</button>
-         <button className="recipebtn" onClick={deleteRecipe}>Delete Recipe</button>
-         </form>
-     
+      <div className="form-group-edit">
+        <form onSubmit={handleFormSubmit}>
+
+          <div className="form-group-edit">
+            <label>Name:</label>
+            <input
+              type="text"
+              name="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+          <div className="form-group-edit">
+            <label>Image:</label>
+            <input type="file" onChange={(e) => handleFileUpload(e)} />
+          </div>
+          <div className="form-group-edit">
+            <label>Instruction:</label>
+            <input
+              type="text"
+              name="instruction"
+              value={instruction}
+              onChange={(e) => setInstruction(e.target.value)}
+            />
+          </div>
+          <div className="form-group-edit">
+            <label htmlFor="selectIngredients"> Ingredients:</label>
+            <input
+              className="addIngredients"
+              id="selectIngredients"
+              type="text"
+              placeholder="Search Ingredients"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            <div className="ingredient-list">
+              { allIngredients.map((ingredient) => {
+                return (
+                  <div key={ingredient._id} className="searchDiv">
+                    <div className="searchP">{ingredient.name}</div>
+                    <button
+                      className="searchButton"
+                      type="button"
+                      onClick={() => addIngredients(ingredient._id)}
+                    >
+                      Select
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <div className="form-group-edit">
+            <label>Cooking Time:</label>
+            <input
+              type="text"
+              name="cookingTime"
+              value={cookingTime}
+              onChange={(e) => setCookingTime(e.target.value)}
+            />
+          </div>
+          <button type="submit">Update Recipe</button>
+          <button className="recipebtn" onClick={deleteRecipe}>
+            Delete Recipe
+          </button>
+        </form>
+      </div>
     </div>
-  </div>
-  )}
+  );
+}
