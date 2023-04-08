@@ -20,6 +20,7 @@ export default function AddRecipe(props) {
 
   const { user } = useContext(AuthContext);
   const ingredientsCopy = [...ingredients];
+  
 
   useEffect(() => {
     if (search) {
@@ -28,6 +29,7 @@ export default function AddRecipe(props) {
           headers: { Authorization: `Bearer ${storedToken}` },
         })
         .then((response) => {
+
           setAllIngredients(response.data);
         })
         .catch((err) => console.log("This is a search error:", err));
@@ -108,18 +110,21 @@ export default function AddRecipe(props) {
               <input type="file" onChange={(e) => handleFileUpload(e)} />
             </div>
             <div className="form-group">
+
               <label htmlFor="selectIngredients"> Ingredients:</label>
               <input
                 className="addIngredients  hidden"
+
                 id="selectIngredients"
                 type="text"
                 placeholder="Search Ingredients"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
+
               <div className="ingredient-list">
                 {allIngredients.map((ingredient) => {
-                  return (
+      return (
                     <div key={ingredient._id} className="searchDiv">
                       <div className="searchP">{ingredient.name}</div>
                       <button
@@ -132,6 +137,7 @@ export default function AddRecipe(props) {
                     </div>
                   );
                 })}
+
               </div>
               <div className="form-group">
                 <div className="ingredient-list">
@@ -160,6 +166,7 @@ export default function AddRecipe(props) {
                 </div>
               </div>
             </div>
+
             <div className="form-group">
               <label>Instruction:</label>
               <textarea

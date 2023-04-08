@@ -13,7 +13,7 @@ body {
 
 .form-group {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   padding: 5px;
 }
@@ -278,6 +278,7 @@ p {
 
 form {
   width: 40%;
+  margin: 0 auto;
 }
 
 .form-container-edit {
