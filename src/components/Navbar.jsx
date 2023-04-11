@@ -9,8 +9,8 @@ function Navbar() {
 
   return (
     <nav className="navbar">
+            <img src={logo} alt="logo" className="App-logo" />
       <ul className="navbar-nav">
-        <img src={logo} alt="logo" className="App-logo" />
         <li className="nav-item">
           <Link to="/" className="nav-link">
             Home
@@ -40,9 +40,6 @@ function Navbar() {
               <Link onClick={logOutUser} className="nav-link logout-link">
                 Logout
               </Link>
-            </li>
-            <li className="nav-item">
-              <span className="nav-link">Welcome {user && user.name}!</span>
             </li>
           </>
         )}

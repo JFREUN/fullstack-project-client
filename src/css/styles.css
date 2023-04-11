@@ -151,18 +151,18 @@ color: #207d6e ;
 .navbar {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   background-color: #f8f9fa;
-  padding: 10px;
-  width: 100%;
+  max-width: 100%;
+  padding: 0 2em;
 }
 
 .navbar-nav {
   display: flex;
   flex-direction: row;
-  align-items: center;
   list-style-type: none;
+  margin: 0;
 }
 
 .navbar-nav li {
@@ -174,7 +174,7 @@ color: #207d6e ;
   text-decoration: none;
   margin-right: 20px;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .nav-link:hover {
@@ -391,13 +391,61 @@ a {
 }
 
 /* Add Meal Component */
+.addMealSection{
+  background-color: #F4F9F4;
+  padding: 3em 10%;
+  text-align: left;
+  display: flex;
+  align-items: center;
+}
+
+.formWrapper{
+  width: 50%;
+  margin-left: 10%;
+}
+
+.formImgWrapper{
+  width: 50%;
+}
+
+.formImgWrapper img{
+  width: 100%;
+}
+
 .addMealDay{
-  margin: 20px auto;
+  margin: 20px 0;
   background-color: #A7D7C5;
-  width: 30%;
   padding: 20px;
   border-radius: 20px;
   text-align: left;
+  width: 90%;
+}
+
+.addMealDay h2{
+  text-align: center;
+  margin-left: 0.5em;
+  color:#207d6e;
+}
+.burgerIconWrapper{
+  width: 2em;
+  height: 2em;
+  background-color:#F4F9F4;
+  border-radius: 50%;
+  display: flex;
+  padding: 0.5em;
+  align-items: center;
+  justify-content: center;
+}
+
+.addMealHeader{
+  display: flex;
+  align-items: center;
+}
+
+.burgerIconWrapper img{
+  width: 100%;
+  object-fit: contain;
+
 }
 #selectDay{
   width: 100%;
@@ -444,6 +492,7 @@ align-items: center;
   border-radius: 5px;
 }
 
+
 .searchButton:focus{
   background-color: #74B49B;
   color: #F4F9F4;
@@ -453,10 +502,14 @@ align-items: center;
   border-style: none;
   background-color: #5C8D89;
   padding: 12px 20px; 
-  width: 125px;
+  min-width: 125px;
   border-radius: 5px;
   color: #F4F9F4;
   margin-top: 20px;
+  
+}
+.submitButton:hover{
+  background-color: #74B49B;
 }
 
 /* Mealplan site */
@@ -482,9 +535,20 @@ align-items: center;
   font-weight: 600;
 }
 
-.mealDiv{
+.noMealMessage{
+  background-color: white;
   padding: 10px; 
-  background-color: rgba(167, 215, 197, 0.5);
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+.mealDiv{
+  display: flex;
+  flex-direction: column-reverse;
+  padding: 10px; 
+  background-color: white;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;;
   text-align: center;
   border-radius: 10px;
   margin: 10px;
@@ -494,14 +558,63 @@ align-items: center;
   aspect-ratio: 2/1;
   max-width:150px;
 object-fit: cover;
+border-radius: 10px;
+
 }
 .mealDiv a {
   text-decoration: none;
   color: black;
+  margin: 8px 0 5px 0;
+}
+
+.mealDiv a:hover{
+  color: grey;
 }
 
 .mealsContainer{
   width: 100%;
+}
+
+.mealplanHeading{
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  text-align: left;
+  width: 80%;
+  margin: 30px auto;
+}
+
+.mealplanHeading h1{
+color: black;
+margin: 0;
+}
+.mealplanHeading p{
+  color: black;
+  margin: 20px 0 0 0;
+}
+
+.mealplanHeading span{
+  color:#207d6e;
+}
+
+.welcomeWrapper{
+  display: flex;
+  align-items: center;
+  
+}
+.welcomeWrapper img{
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  background-color:#F4F9F4;
+  border-radius: 50%;
+  padding: 0.5em;
+}
+
+.addAndDelete{
+  width: 25%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .mealButton{
@@ -512,6 +625,11 @@ object-fit: cover;
   border-radius: 5px;
   color: #F4F9F4;
   margin-top: 20px;
+  font-weight: 600;
+}
+
+.mealButton:hover{
+  background-color: #74B49B;
 }
 .buttonsContainer{
   display: flex;
@@ -529,6 +647,9 @@ object-fit: cover;
   border-radius: 5px;
   color: #F4F9F4;
   margin: 0 10px;
+}
+.editButton:hover{
+  background-color:#74B49B;
 }
 
 .editButton img{
@@ -568,15 +689,93 @@ object-fit: cover;
   overflow-y: scroll; /* add scroll when the height exceeds max-height */
 }
 
-.footer{
 
-  height: 220px;
+
+/* Fridge Page */
+
+.ingredientsContainer{
+  width: 60%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+.ingredientsList{
+  border-radius: 10px;
+  background-color: rgba(167, 215, 197, 0.5);
+  display: flex;
+  flex-wrap: wrap;
+  width: 80%;
+  justify-content: center;
+  padding: 20px 0;
+  height: 70vh;
+  overflow: scroll;
+}
+
+.ingredientsDiv{
+  display: flex;
+  justify-content: baseline;
+  align-items: center;
+  flex-direction: column;
+  background-color: #F4F9F4;
+  padding: 1em;
+  border-radius: 10px;
+  margin: 10px;
+  width: 15%;
+}
+
+.ingredientsDiv{
+  width: 10%;
+}
+
+.ingredientsList th {
+  padding: 10px;
+  margin: 0;
+}
+
+.ingredientsList td {
+  padding: 10px;
+  margin: 10px 10px;
+  background-color: #F4F9F4;
+  border-radius: 10px;
+}
+
+.ingredientsList button{
+  border-style: none;
+  padding: 5px;
+  min-width: 40px;
+  border-radius: 5px;
+  color: white
+}
+
+.placeholder{
+  width: 40%;
+}
+
+.fridgeSection{
+  display: flex;
+  padding: 0 50px;
+}
+
+/* Shopping List */
+
+.shoppingList{
+  width: 25%; 
+  margin: 20px auto;
+  background-color: #F4F9F4;
+  border-radius: 10px;
+  height: 500px;
+}
+
+
+
+
 .footer {
+  height: 18rem;
+  width: 100%;
   background-color: #aabdaf33;
-  padding-top: 10px;
-  padding-bottom: 50px;
+  padding: 10px 0;
 }
 
 .footer h3 {
@@ -605,5 +804,109 @@ object-fit: cover;
   line-height: 24px;
   margin-bottom: 10px;
 }
+
+/* Public HomePage */
+
+
+.publicHome{
+  position: relative;
+  min-height: 100vh;
+}
+
+.heroSection{
+  display: flex;
+  background-color: #aabdaf33;
+  justify-content: center;
+  padding: 60px 0;
+}
+.heroSection h1{
+  color: black;
+  font-size: 54px;
+  font-weight: 900;
+  margin: 0;
+}
+.heroImage{
+  width: 40%;
+}
+.heroImage img{
+  width: 80%;
+  background-color: white;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+}
+
+.heroText{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  max-width: 40%;
+  margin: 0;
+}
+.heroText p {
+  color: gray;
+}
+.buttonWrapper{
+  margin-top: 20px;
+}
+.buttonWrapper button{
+  border-style: none;
+  padding: 10px;
+  color: white;
+  font-size: 18px;
+  width: 125px;
+  background-color: #207d6e;
+  border-radius: 10px;
+}
+
+.buttonWrapper button:hover{
+  background-color: #74B49B;
+}
+
+.buttonSignup{
+  margin-left: 20px;
+}
+
+.trioSection{
+  padding: 3em 2em;
+
+}
+
+.trioWrapper{
+  display: flex;
+  width: 80%;
+  margin: 30px auto;
+}
+
+.trioWrapper h3{
+  margin: 1em 0;
+
+}
+
+.trioWrapper p{
+  margin: 0;
+}
+
+.trioWrapper > div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.imageWrapper{
+  border-radius: 50%;
+  background-color: #207d6e;
+  width: 10%;
+  padding: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imageWrapper img {
+  filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(354deg) brightness(105%) contrast(101%);
+}
+
 
 

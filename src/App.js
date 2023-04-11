@@ -12,6 +12,7 @@ import Navbar from "./components/Navbar";
 import IsPrivate from "./components/IsPrivate";
 import IsAnon from "./components/IsAnon";
 import FridgePage from "./pages/FridgePage";
+import Footer from "./components/Footer";
 
 function App() {
   return (
