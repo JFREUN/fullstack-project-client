@@ -44,11 +44,18 @@ function RecipeDetail(props) {
 
               <div >
               <h3>Ingredients</h3>
-                {recipe.ingredients &&
-                  recipe.ingredients.map((ingredient) => {
+              {recipe.ingredients.map((ingredient) => {
+                   let ingredientColor ;
+                    ingredient.inStock ? ingredientColor = "green" : ingredientColor = "red";
+                                          
                     return (
-                      <div key={ingredient._id} className="ingredient-list-detail">
-                        <li>{ingredient.name}</li>
+                      <div
+                        key={ingredient._id}
+                        className="ingredient-list-detail"
+                      >
+                        <li style={{ color: ingredientColor }}>
+                          {ingredient.name}
+                        </li>
                       </div>
                     );
                   })}

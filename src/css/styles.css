@@ -3,6 +3,7 @@ body {
   font-size: 16px;
   line-height: 1.5;
   color: #333;
+ 
 }
 
 .form-container {
@@ -246,7 +247,6 @@ p {
 
 .form-group-edit {
   display: flex;
-  width: 50%;
   flex-direction: row;
   justify-content: center;
   background-color: #F4F9F4;
@@ -284,19 +284,16 @@ form {
 
 .form-container-edit {
   width: 100%;
-
   background-color: #F4F9F4;
   padding: 20px;
 }
 
 
 .edit-recipe-img {
-
   max-width: 500px;
   border-radius: 10px;
   margin-top: 40px;
   margin-bottom: 40px;
-
 }
 
 .recipeDetails {
@@ -304,6 +301,7 @@ form {
   margin: 0 auto;
   padding: 20px;
   background-color: #F4F9F4;
+  object-fit: cover;
 }
 
 @media (max-width: 768px) {
@@ -339,7 +337,7 @@ form {
 }
 
 .recipeContent {
-  flex: 1;
+  width: 500px;
   border: solid #207d6e;
   border-radius: 10px;
   padding: 10px;
@@ -692,6 +690,7 @@ margin: 0;
 }
 
 
+
 /* Fridge Page */
 
 .ingredientsContainer{
@@ -771,6 +770,7 @@ margin: 0;
 
 
 
+
 .footer {
   height: 18rem;
   width: 100%;
@@ -806,6 +806,7 @@ margin: 0;
 }
 
 /* Public HomePage */
+
 
 .publicHome{
   position: relative;
@@ -906,5 +907,6 @@ margin: 0;
 .imageWrapper img {
   filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(354deg) brightness(105%) contrast(101%);
 }
+
 
 
