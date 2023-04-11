@@ -27,7 +27,7 @@ export default function Recipes() {
     <div>
       <AddRecipe refreshRecipes={refreshRecipes} />
       <div className="recipe-list">
-        {recipes &&
+        {
           recipes.map((recipe) => (
             <div key={recipe._id} className="recipe-container">
               <h3>{recipe.name}</h3>

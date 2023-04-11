@@ -29,7 +29,7 @@ export default function AddRecipe(props) {
           headers: { Authorization: `Bearer ${storedToken}` },
         })
         .then((response) => {
-          
+
           setAllIngredients(response.data);
         })
         .catch((err) => console.log("This is a search error:", err));
@@ -122,19 +122,34 @@ export default function AddRecipe(props) {
                 onChange={(e) => setSearch(e.target.value)}
               />
 
-
               <div className="ingredient-list">
                 {allIngredients.map((ingredient) => {
       return (
                     <div key={ingredient._id} className="searchDiv">
                       <div className="searchP">{ingredient.name}</div>
-                      <button
+                      {!ingredients.includes(ingredient._id) ? <button
                         className="searchButton"
                         type="button"
                         onClick={() => addIngredients(ingredient._id)}
                       >
                         Select
                       </button>
+                      :
+                      <button
+                          className="deselectButton"
+                          type="button"
+                          onClick={() => {
+                            const newIngredients = ingredients.filter(
+                              (i) => i !== ingredient._id
+                            );
+                            console.log('deselect')
+                            setIngredients(newIngredients);
+                            console.log(ingredients)
+                          }}
+                        >
+                          Deselect
+                        </button>
+                      }
                     </div>
                   );
                 })}
@@ -142,7 +157,7 @@ export default function AddRecipe(props) {
               </div>
               <div className="form-group">
                 <div className="ingredient-list">
-                  {ingredients.map((ingredient) => {
+                  {/* {ingredients.map((ingredient) => {
                     const ingredientName = allIngredients.find(
                       (i) => i._id === ingredient
                     )?.name;
@@ -163,7 +178,7 @@ export default function AddRecipe(props) {
                         </button>
                       </div>
                     );
-                  })}
+                  })} */}
                 </div>
               </div>
             </div>

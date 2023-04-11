@@ -1,4 +1,3 @@
-
 /* Colours: 
 white: #F4F9F4; 
 light-green: #A7D7C5;
@@ -14,6 +13,8 @@ dark-green: #5C8D89;
   height: 10vmin;
   pointer-events: none;
   padding: 10px;
+  margin-right: auto;
+  margin-left: 0;
 }
 
 @media (prefers-reduced-motion: no-preference) {
