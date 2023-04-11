@@ -5,6 +5,7 @@ import "../css/styles.css";
 import axios from "axios";
 import "../css/styles.css";
 import ShoppingList from "../components/ShoppingList";
+import saladIcon from "../images/Salad.svg"
 
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5005";
@@ -68,26 +69,22 @@ export default function FridgePage() {
      
       <div className="ingredientsContainer">
         <h2>Groceries</h2>
-        <table className="ingredientsList">
-          <thead>
-            <tr>
-              <th>Ingredient</th>
-              <th>In Stock</th>
-            </tr>
-          </thead>
-          <tbody>
+        <div className="ingredientsList">
+        
+       
             {
               ingredients.map((ingredient) => (
               
-                <tr key={ingredient._id}>
-                  <td>{ingredient.name}</td>
-                  <td>
+                <div className="ingredientsDiv" key={ingredient._id}>
+                <img src={saladIcon} alt="" />
+                  <p>{ingredient.name}</p>
+                  
                     {ingredient.inStock && (
                       <button
                         onClick={() => handleInstock(ingredient._id)}
                         style={{ backgroundColor: "#5C8D89" }}
                       >
-                        Yes
+                        In Stock
                       </button>
                     )}
                     {!ingredient.inStock && (
@@ -95,14 +92,14 @@ export default function FridgePage() {
                         onClick={() => handleInstock(ingredient._id)}
                         style={{ backgroundColor: "#89375F" }}
                       >
-                        No
+                        Out of Stock
                       </button>
                     )}
-                  </td>
-                </tr>
+                  
+                </div>
               ))}
-          </tbody>
-        </table>
+        
+        </div>
 
       </div>
     </div>

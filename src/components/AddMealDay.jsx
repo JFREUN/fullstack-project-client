@@ -2,6 +2,8 @@ import axios from "axios";
 import React from "react";
 import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "./../context/auth.context";
+import houseCook from "../images/house-cook.png"
+import burger from "../images/Burger.png"
 
 import "../css/styles.css";
 
@@ -98,8 +100,22 @@ export default function AddMeal(props) {
 
   return (
     <div>
-      <h2>Add a meal:</h2>
+    <section className="addMealSection">
+    <div className="formImgWrapper">
+    <img src={houseCook} alt="" />
+    </div>
+    <div className="formWrapper">
       <form className="addMealDay" onSubmit={handleSubmit}>
+
+      <div className="addMealHeader">
+
+      <div className="burgerIconWrapper">
+      <img src={burger} alt=""/> 
+      </div>
+
+      <h2>Add a Meal</h2>
+      </div>
+      
         <p>{error}</p>
         <label className="addMealLabels" htmlFor="selectDay">
           Day:
@@ -137,7 +153,7 @@ export default function AddMeal(props) {
               <div key={oneRecipe._id} className="searchDiv">
                 <p className="searchP">{oneRecipe.name}</p>
                 <button
-                  className="searchButton"
+                  className="searchButton breakfastButton"
                   type="button"
                   onClick={() => setBreakfast(oneRecipe._id)}
                 >
@@ -164,7 +180,7 @@ export default function AddMeal(props) {
               <div key={oneRecipe._id} className="searchDiv">
                 <p className="searchP">{oneRecipe.name}</p>
                 <button
-                  className="searchButton"
+                  className="searchButton lunchButton"
                   type="button"
                   onClick={() => setLunch(oneRecipe._id)}
                 >
@@ -190,7 +206,7 @@ export default function AddMeal(props) {
               <div key={oneRecipe._id} className="searchDiv">
                 <p className="searchP">{oneRecipe.name}</p>
                 <button
-                  className="searchButton"
+                  className="searchButton dinnerButton"
                   type="button"
                   onClick={() => setDinner(oneRecipe._id)}
                 >
@@ -205,6 +221,9 @@ export default function AddMeal(props) {
           Submit
         </button>
       </form>
+      </div>
+      </section>
     </div>
+    
   );
 }
