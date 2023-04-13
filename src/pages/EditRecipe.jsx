@@ -5,6 +5,7 @@ import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "./../context/auth.context";
 import service from "../api/service";
 import "../css/styles.css";
+import recipeImage from "../images/recipe-illustration.png";
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5005";
 
@@ -40,9 +41,7 @@ export default function EditRecipe() {
         setCookingTime(oneRecipe.cookingTime);
       })
       .catch((error) => console.log(error));
-
   }, []);
-
 
   useEffect(() => {
     if (search) {
@@ -120,90 +119,92 @@ export default function EditRecipe() {
 
   return (
     <div className="form-container-edit">
-    
       <div className="form-group-edit">
         <form onSubmit={handleFormSubmit}>
-          <h1>{name}</h1>
+          <h1>{name} </h1>
           <img className="edit-recipe-img" src={imageUrl} alt="recipe" />
-          <div className="edit-form-input-container">
-            <div className="form-group-edit">
-              <label>Name:</label>
-              <input
-                type="text"
-                name="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </div>
-            <div className="form-group-edit">
-              <label>Image:</label>
-              <input type="file" onChange={(e) => handleFileUpload(e)} />
-            </div>
-            <div className="form-group-edit">
-              <label>Instruction:</label>
-              <input
-                type="text"
-                name="instruction"
-                value={instruction}
-                onChange={(e) => setInstruction(e.target.value)}
-              />
-            </div>
-            <div className="form-group-edit">
-              <label htmlFor="selectIngredients">Ingredients:</label>
-              <ul>
-              <div className="ingredient-list">
-                {ingredients.map((ingredient) => (
-                  <li key={ingredient._id}>
-                    {ingredient.name}
-                    <button
-                      className="deselectButton"
-                      type="button"
-                      onClick={() => {
-                        const newIngredients = ingredients.filter(
-                          (i) => i !== ingredient
-                        );
-                        setIngredients(newIngredients);
-                      }}
-                    >
-                      Deselect
-                    </button>
-                  </li>
-                ))}
-                </div>
-              </ul>
-              <input
-                className="addIngredients hidden"
-                id="selectIngredients"
-                type="text"
-                placeholder="Search Ingredients"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
-              <div className="ingredient-list">
-                {allIngredients.map((ingredient, index) => (
-                  <div key={index} className="searchDiv">
-                    <div className="searchEdit">{ingredient.name}</div>
-                    <div className="searchButtons">
-                      <button
-                        className="selectButtonEdit"
-                        type="button"
-                        onClick={() => addIngredients(ingredient._id)}
-                      >
-                        Select
-                      </button>
-                    </div>
-                  </div>
-                ))}
+          <div className="edit-form-input-wrapper">
+            <div className="edit-form-input-container">
+              <div className="form-group-edit">
+                <label>Name:</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
               </div>
-            </div>
-            <div className="form-group-edit">
-              <label>Cooking Time:</label>
-              <input
-                type="text"
-                name="cookingTime"
-                value={cookingTime}
-                onChange={(e) => setCookingTime(e.target.value)}
-              />
+              <div className="form-group-edit">
+                <label>Image:</label>
+                <input type="file" onChange={(e) => handleFileUpload(e)} />
+              </div>
+              <div className="form-group-edit">
+                <label>Instruction:</label>
+                <input
+                  type="text"
+                  name="instruction"
+                  value={instruction}
+                  onChange={(e) => setInstruction(e.target.value)}
+                />
+              </div>
+
+              <div className="form-group-edit">
+                <label htmlFor="selectIngredients">Ingredients:</label>
+                <ul>
+                  <div className="ingredient-list">
+                    {ingredients.map((ingredient) => (
+                      <li key={ingredient._id}>
+                        {ingredient.name}
+                        <button
+                          className="deselectButton"
+                          type="button"
+                          onClick={() => {
+                            const newIngredients = ingredients.filter(
+                              (i) => i !== ingredient
+                            );
+                            setIngredients(newIngredients);
+                          }}
+                        >
+                          Deselect
+                        </button>
+                      </li>
+                    ))}
+                  </div>
+                </ul>
+                <input
+                  className="addIngredients hidden"
+                  id="selectIngredients"
+                  type="text"
+                  placeholder="Search Ingredients"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                />
+                <div className="ingredient-list">
+                  {allIngredients.map((ingredient, index) => (
+                    <div key={index} className="searchDivRecipe">
+                      <div className="searchEdit">{ingredient.name}</div>
+                      <div className="searchButtons">
+                        <button
+                          className="selectButtonEdit"
+                          type="button"
+                          onClick={() => addIngredients(ingredient._id)}
+                        >
+                          Select
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="form-group-edit">
+                <label>Cooking Time:</label>
+                <input
+                  type="text"
+                  name="cookingTime"
+                  value={cookingTime}
+                  onChange={(e) => setCookingTime(e.target.value)}
+                />
+              </div>
             </div>
           </div>
           <button type="submit">Update Recipe</button>
