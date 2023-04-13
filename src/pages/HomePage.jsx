@@ -1,12 +1,15 @@
 import "../css/styles.css";
 import happyIngredients from "../images/happy-ingredients.png";
-import Footer from "../components/Footer";
 import ramen from "../images/Ramen.svg";
 import wine from "../images/Wine.svg";
 import cutlery from "../images/Cutlery.svg";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "./../context/auth.context";
 
 function HomePage() {
+  const { isLoggedIn } = useContext(AuthContext);
+
   return (
     <div className="publicHome">
       <section className="heroSection">
@@ -17,15 +20,31 @@ function HomePage() {
             molestie massa tellus, eget blandit arcu porttitor nec. Vivamus
             eleifend est volutpat mauris bibendum, nec.
           </p>
-          <div className="buttonWrapper">
-            <Link to="/login">
-              {" "}
-              <button>Login</button>
-            </Link>
-            <Link to="/signup">
-              <button className="buttonSignup">Sign up</button>
-            </Link>
-          </div>
+
+          {isLoggedIn && (
+            <div className="buttonWrapper">
+              <Link to="/meals">
+                {" "}
+                <button>Meal Plan</button>
+              </Link>
+              <Link to="/recipes">
+                {" "}
+                <button>Recipes</button>
+              </Link>
+              </div>
+          )}
+
+          {!isLoggedIn && (
+            <div className="buttonWrapper">
+              <Link to="/login">
+                {" "}
+                <button>Login</button>
+              </Link>
+              <Link to="/signup">
+                <button className="buttonSignup">Sign up</button>
+              </Link>
+            </div>
+          )}
         </div>
         <div className="heroImage">
           <img src={happyIngredients} alt="" />
@@ -67,7 +86,6 @@ function HomePage() {
         </div>
       </section>
       <section></section>
-      <Footer></Footer>
     </div>
   );
 }

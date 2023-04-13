@@ -4,6 +4,8 @@ import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "./../context/auth.context";
 import { useParams, useNavigate } from "react-router-dom";
 import "../css/styles.css";
+import burger from "../images/Burger.png";
+
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5005";
 
@@ -104,7 +106,9 @@ export default function AddMeal(props) {
 
   return (
     <div>
-      <h2>Edit {day}'s meal:</h2>
+    <section className="addMealSection">
+
+    <div className="editWrapper">
       <div className="editMeals">
         <div>
           <h3>Breakfast:</h3>
@@ -117,12 +121,24 @@ export default function AddMeal(props) {
           <p>{breakfast.name}</p>
         </div>
         <div>
-          <h3>Dinnert:</h3>
+          <h3>Dinner:</h3>
           <img src={dinner.imageUrl} alt="" />
           <p>{dinner.name}</p>
         </div>
       </div>
+      </div>
+
+      <div className="formWrapper">
+      
       <form className="addMealDay" onSubmit={handleSubmit}>
+      <div className="addMealHeader">
+
+      <div className="burgerIconWrapper">
+      <img src={burger} alt=""/> 
+      </div>
+
+      <h2>Edit {day}'s meal:</h2>
+      </div>
         <label className="addMealLabels" htmlFor="selectDay">
           Day:
         </label>
@@ -227,6 +243,8 @@ export default function AddMeal(props) {
           Submit
         </button>
       </form>
+      </div>
+      </section>
     </div>
   );
 }

@@ -301,6 +301,12 @@ margin-left: 10%;
   }
 }
 
+.newLogo{
+  width: 100%;
+}
+
+/* Navbar */
+
 .navbar {
   display: flex;
   flex-wrap: wrap;
@@ -308,7 +314,7 @@ margin-left: 10%;
   align-items: center;
   background-color: #f8f9fa;
   max-width: 100%;
-  padding: 0 2em;
+  padding: 0.8em 2em;
 }
 
 .navbar-nav {
@@ -321,6 +327,11 @@ margin-left: 10%;
 .navbar-nav li {
   margin-right: 10px;
 }
+
+.logoLink{
+  width: 12%;
+}
+
 
 .nav-link {
   color: #207d6e;
@@ -335,20 +346,31 @@ margin-left: 10%;
 }
 
 @media only screen and (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
+
+  .logoLink{
+    width: 20%;
   }
 
-  .navbar-nav {
+  .buttonWrapper{
+    display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    margin-top: 20px;
   }
+}
 
-  .nav-link {
-    margin: 10px 0;
+@media only screen and (max-width: 480px) {
+
+  .logoLink{
+    width: 40%;
   }
+.navbar-nav{
+  padding-left: 1em;
+  flex-direction: column;
+}
+.buttonWrapper{
+  display: flex;
+  flex-direction: column;
+}
+
 }
 .navbar-logo {
   height: 80px;
@@ -587,9 +609,9 @@ a {
 }
 
 .addMealDay h2{
-  text-align: center;
+  text-align: left;
+  color:black;
   margin-left: 0.5em;
-  color:#207d6e;
 }
 .burgerIconWrapper{
   width: 2em;
@@ -831,7 +853,7 @@ margin: 0;
 
 .editMeals{
   display: flex;
-  width: 75%; 
+  width: 100%; 
   margin: 0 auto;
   justify-content: space-around;
 }
@@ -843,10 +865,15 @@ margin: 0;
   margin: 10px 0;
 }
 .editMeals img{
-  width: 200px;
-  height: 150px;
+  width: 90%;
+  aspect-ratio: 1.5/1;
   object-fit: cover;
   border-radius: 10px;
+}
+
+.editWrapper{
+  width: 50%;
+  align-self: flex-start;
 }
 
 
@@ -865,18 +892,38 @@ margin: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 30px;
 }
 
+
+.fridgeLeft{
+  display: flex; 
+  flex-direction: column;
+  width: 40%;
+}
 .ingredientsList{
   border-radius: 10px;
   background-color: rgba(167, 215, 197, 0.5);
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   width: 80%;
   justify-content: center;
   padding: 20px 0;
   height: 70vh;
-  overflow: scroll;
+}
+.ingredientsList h2{
+  margin: 0;
+}
+
+.ingredientsWrapper{
+  border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  padding: 20px 0;
+  height: 70vh;
+  overflow-y: scroll;
 }
 
 .ingredientsDiv{
@@ -926,14 +973,48 @@ margin: 0;
 
 /* Shopping List */
 
-.shoppingList{
-  width: 25%; 
-  margin: 20px auto;
-  background-color: #F4F9F4;
-  border-radius: 10px;
-  height: 500px;
+.greenSpan{
+  color: #5C8D89 !important;
+  font-weight: 600;
+}
+.redSpan{
+  font-weight: 600;
+  color: #89375F !important;
 }
 
+.shoppingList{
+  width: 80%;
+  margin: 10px auto;
+  background-color: #F4F9F4;
+  border-radius: 10px;
+  height: 50vh;
+  align-self: flex-start;
+}
+/* Scrollbar */
+
+/* width */
+::-webkit-scrollbar {
+  width: 1em;
+  margin-right: 1em;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background:#F4F9F4;
+  border-radius: 20px;
+  margin-right: 20px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background:#5C8D89;
+  border-radius: 20px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
 
 
 
@@ -1074,5 +1155,193 @@ margin: 0;
   filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(354deg) brightness(105%) contrast(101%);
 }
 
+/* Login Page */
+.loginPage{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0;
+  padding: 1em 2em;
+}
+
+.textContainer{
+  width: 40%;
+  padding: 1em 0 2em 0;
+  border-radius: 20px;
+  background-color: #F4F9F4;
+  background-color: #F4F9F4;
+
+}
+
+.imgContainer{
+  width:50%;
+  padding-left: 3%;
+}
+.imgContainer img{
+  max-width: 90%;
+}
+
+.textContainer p {
+  text-align: center;
+  color: black;
+  margin: 0 0 1em 0;
+}
+
+.textContainer label {
+  display: block;
+  width: 100%;
+  text-align: left;
+  margin: 1em 0;
+  color: black;
+  font-size: 1em;
+}
+.textContainer input{
+  display: block;
+  width: 100%;
+  margin: 0;
+  border-style: none;
+}
+
+.textContainer form{
+  width: 70%;
+}
+
+.signupLink{
+  color:#5C8D89;
+  font-weight: bold;
+}
+
+.signupLink:hover{
+  color: black;
+  padding-bottom: 0.5em;
+  border-bottom: solid 2px black;
+}
+
+/* Mobile */
+
+@media (max-width: 480px) {
+
+  /* SignupLogin */
+
+  .loginPage{
+    display: flex;
+    align-items: center;
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0;
+    padding: 1em 2em;
+  }
+
+  .textContainer{
+    width: 100%;
+    padding: 1em 0 2em 0;
+    border-radius: 20px;
+    background-color: #F4F9F4;
+    background-color: #F4F9F4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .textContainer p{
+    max-width: 70%;
+  }
+
+  .imgContainer{
+    width:100%;
+  }
+
+  .imgContainer img{
+    max-width: 100%;
+  }
+
+  .textContainer form{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+ 
+  .textContainer input{
+    display: block;
+    width: 90%;
+    margin: 0;
+    border-style: none;
+  }
+  .textContainer label {
+    display: block;
+    width: 90%;
+    text-align: left;
+    margin: 1em 0;
+    color: black;
+    font-size: 1em;
+  }
+}
+
+/* Tablet */
+
+@media (max-width: 768px) {
+
+  /* Login/Signup */
+  .loginPage{
+    display: flex;
+    align-items: center;
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0;
+    padding: 1em 2em;
+  }
+
+  .textContainer{
+    width: 100%;
+    padding: 1em 0 2em 0;
+    border-radius: 20px;
+    background-color: #F4F9F4;
+    background-color: #F4F9F4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .textContainer p{
+    max-width: 70%;
+  }
+
+  .imgContainer{
+    width:50%;
+  }
+
+  .imgContainer img{
+    max-width: 100%;
+  }
+
+  .textContainer form{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+ 
+  .textContainer input{
+    display: block;
+    width: 90%;
+    margin: 0;
+    border-style: none;
+  }
+  .textContainer label {
+    display: block;
+    width: 90%;
+    text-align: left;
+    margin: 1em 0;
+    color: black;
+    font-size: 1em;
+  }
+
+}
 
 
