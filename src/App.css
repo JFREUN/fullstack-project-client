@@ -9,19 +9,9 @@ dark-green: #5C8D89;
   text-align: center;
 }
 
-.App-logo {
-  height: 10vmin;
-  pointer-events: none;
-  padding: 10px;
-  margin-right: auto;
-  margin-left: 0;
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 10s linear;
-  }
-}
+
+
 
 .App-header {
   background-color: #282c34;
