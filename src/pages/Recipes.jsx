@@ -41,7 +41,6 @@ export default function Recipes() {
             </div>
           ))}
       </div>
-      <Footer/>
     </div>
   );
 }

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../css/styles.css";
+import houseCook from "../images/house-cook.png";
 
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5005";
@@ -38,34 +39,44 @@ function SignUp(props) {
   };
 
   return (
-    <div className="SignupPage">
-      <h1>Sign Up</h1>
+    <div className="loginPage">
+      <div className="textContainer">
+        <h1>Sign Up</h1>
+        <p>Welcome Chef, please enter your details.</p>
+        <form onSubmit={handleSignupSubmit}>
+          <label>Email:</label>
+          <input
+            type="email"
+            name="email"
+            value={email}
+            onChange={handleEmail}
+            placeholder="gordonramsey@gmail.com"
+          />
 
-      <form onSubmit={handleSignupSubmit}>
-        <label>Email:</label>
-        <input type="email" name="email" value={email} onChange={handleEmail} />
+          <label>Password:</label>
+          <input
+            type="password"
+            name="password"
+            value={password}
+            placeholder="******"
+            onChange={handlePassword}
+          />
 
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePassword}
-        />
+          <label>Name:</label>
+          <input type="text" name="name" value={name} onChange={handleName} placeholder="Gordon Ramsey"/>
 
-        <label>Name:</label>
-        <input type="text" name="name" value={name} onChange={handleName} />
+          <button type="submit">Sign Up</button>
+        </form>
 
-        <button type="submit">Sign Up</button>
-      </form>
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
-
-      <p>Already have account?</p>
-      <Link to={"/login"}> Login</Link>
-    
+        <p>Already have account?</p>
+        <Link to={"/login"} className="signupLink"> Login</Link>
+      </div>
+      <div className="imgContainer">
+        <img src={houseCook} alt="" />
+      </div>
     </div>
-   
   );
 }
 

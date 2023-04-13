@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "./../context/auth.context";
 import "../css/styles.css";
+import houseCook from "../images/house-cook.png";
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5005";
 
@@ -22,7 +23,6 @@ function Login(props) {
     e.preventDefault();
     const requestBody = { email, password };
 
-
     axios
       .post(`${API_URL}/auth/login`, requestBody)
       .then((response) => {
@@ -30,7 +30,7 @@ function Login(props) {
 
         storeToken(response.data.authToken);
         authenticateUser();
-        navigate("/");
+        navigate("/meals");
       })
       .catch((error) => {
         const errorDescription = error.response.data.message;
@@ -39,27 +39,41 @@ function Login(props) {
   };
 
   return (
-    <div className="LoginPage">
-      <h1>Login</h1>
+    <div className="loginPage">
+      <div className="textContainer">
+        <h1>Login</h1>
+        <p>Welcome Chef, please enter your details.</p>
 
-      <form onSubmit={handleLoginSubmit}>
-        <label>Email:</label>
-        <input type="email" name="email" value={email} onChange={handleEmail} />
+        <form onSubmit={handleLoginSubmit}>
+          <label>Email:</label>
+          <input
+            type="email"
+            name="email"
+            value={email}
+            placeholder="gordonramsey@gmail.com"
+            onChange={handleEmail}
+          />
 
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePassword}
-        />
+          <label>Password:</label>
+          <input
+            type="password"
+            name="password"
+            value={password}
+            placeholder="******"
+            onChange={handlePassword}
+          />
 
-        <button type="submit">Login</button>
-      </form>
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
+          <button type="submit">Login</button>
+        </form>
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-      <p>Don't have an account yet?</p>
-      <Link to={"/signup"}> Sign Up</Link>
+        <p>Don't have an account yet?</p>
+        <Link to={"/signup"} className="signupLink"> Sign Up</Link>
+      </div>
+
+      <div className="imgContainer">
+        <img src={houseCook} alt="" />
+      </div>
     </div>
   );
 }

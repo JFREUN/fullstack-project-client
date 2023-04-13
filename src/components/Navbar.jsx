@@ -2,14 +2,16 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "./../context/auth.context";
 import "../css/styles.css";
-import logo from "../images/dyner-low-resolution-logo-color-on-transparent-background.png";
+import logo from "../images/newLogo.png";
 
 function Navbar() {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
 
   return (
     <nav className="navbar">
-            <img src={logo} alt="logo" className="App-logo" />
+    <Link to="/" className="logoLink">
+    <img src={logo} alt="logo" className="newLogo" />
+    </Link>
       <ul className="navbar-nav">
         <li className="nav-item">
           <Link to="/" className="nav-link">
