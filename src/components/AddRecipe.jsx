@@ -3,6 +3,7 @@ import { useEffect, useState, useContext } from "react";
 import service from "../api/service";
 import { AuthContext } from "./../context/auth.context";
 import axios from "axios";
+import recipeImage from "../images/recipe-illustration.png"
 
 import "../css/styles.css";
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5005";
@@ -20,7 +21,6 @@ export default function AddRecipe(props) {
 
   const { user } = useContext(AuthContext);
   const ingredientsCopy = [...ingredients];
-  
 
   useEffect(() => {
     if (search) {
@@ -29,7 +29,6 @@ export default function AddRecipe(props) {
           headers: { Authorization: `Bearer ${storedToken}` },
         })
         .then((response) => {
-
           setAllIngredients(response.data);
         })
         .catch((err) => console.log("This is a search error:", err));
@@ -89,14 +88,26 @@ export default function AddRecipe(props) {
   };
 
   return (
-    <div className="form-container">
+    
+      <div>
       <button className="recipeHideBtn" onClick={toggleShowForm}>
         {showForm ? "Hide Form" : "Add Recipe"}
       </button>
+    <div className="form-container">
+      
       <div className="form-group">
+    
         {showForm && (
           <form onSubmit={handleSubmit} className="recipe-form">
+           
             <div className="form-group">
+           
+              <div className="addRecipeHeader">
+                <div className="burgerIconWrapper">
+                  <img src={recipeImage} alt="" />
+                </div>
+                <h2>Add a Recipe</h2>
+              </div>
               <label>Name:</label>
               <input
                 type="text"
@@ -110,11 +121,10 @@ export default function AddRecipe(props) {
               <input type="file" onChange={(e) => handleFileUpload(e)} />
             </div>
             <div className="form-group">
-
-              <label htmlFor="selectIngredients"> Ingredients:</label>
+              <label className="add-ingredient-label" htmlFor="selectIngredients"> Ingredients:</label>
+              <div className="ingredient-search-container">
               <input
                 className="addIngredients  hidden"
-
                 id="selectIngredients"
                 type="text"
                 placeholder="Search Ingredients"
@@ -124,36 +134,40 @@ export default function AddRecipe(props) {
 
               <div className="ingredient-list">
                 {allIngredients.map((ingredient) => {
-      return (
-                    <div key={ingredient._id} className="searchDiv">
-                      <div className="searchP">{ingredient.name}</div>
-                      {!ingredients.includes(ingredient._id) ? <button
-                        className="searchButton"
-                        type="button"
-                        onClick={() => addIngredients(ingredient._id)}
-                      >
-                        Select
-                      </button>
-                      :
-                      <button
+                  return (
+                    <div key={ingredient._id} className="searchDivRecipe">
+                      <div className="search-recipe-P">{ingredient.name}</div>
+                      {!ingredients.includes(ingredient._id) ? (
+                        <button
+                          className="searchButton"
+                          type="button"
+                          onClick={() => addIngredients(ingredient._id)}
+                        >
+                          Select
+                        </button>
+                      ) : (
+                        <button
                           className="deselectButton"
                           type="button"
                           onClick={() => {
                             const newIngredients = ingredients.filter(
                               (i) => i !== ingredient._id
                             );
-                            console.log('deselect')
+                            console.log("deselect");
                             setIngredients(newIngredients);
-                            console.log(ingredients)
+                            console.log(ingredients);
                           }}
                         >
                           Deselect
                         </button>
-                      }
+                        
+                      )}
                     </div>
+                    
                   );
+                  
                 })}
-
+              </div>
               </div>
               <div className="form-group">
                 <div className="ingredient-list">
@@ -206,6 +220,7 @@ export default function AddRecipe(props) {
           </form>
         )}
       </div>
+    </div>
     </div>
   );
 }

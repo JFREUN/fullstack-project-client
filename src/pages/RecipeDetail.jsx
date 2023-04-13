@@ -42,25 +42,25 @@ function RecipeDetail(props) {
               <h3>Instructions: </h3>
               <p>{recipe.instruction}</p>
 
-              <div >
-              <h3>Ingredients</h3>
-              {recipe.ingredients.map((ingredient) => {
-                   let ingredientColor ;
-                    ingredient.inStock ? ingredientColor = "green" : ingredientColor = "red";
-                                          
-                    return (
-                      <div
-                        key={ingredient._id}
-                        className="ingredient-list-detail"
-                      >
-                        <li style={{ color: ingredientColor }}>
-                          {ingredient.name}
-                        </li>
-                      </div>
-                    );
-                  })}
+              <div>
+                <h3>Ingredients</h3>
+                {recipe.ingredients.map((ingredient, index) => {
+                  let ingredientColor;
+                  ingredient.inStock
+                    ? (ingredientColor = "green")
+                    : (ingredientColor = "red");
 
-
+                  return (
+                    <div
+                      key={index}
+                      className="ingredient-list-detail"
+                    >
+                      <li style={{ color: ingredientColor }}>
+                        {ingredient.name}
+                      </li>
+                    </div>
+                  );
+                })}
               </div>
               <h3>Cooking Time: </h3>
 
